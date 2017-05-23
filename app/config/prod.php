@@ -5,7 +5,7 @@ $app['db.options'] = array(
     'charset'  => 'utf8',
     'host'     => 'localhost',
     'port'     => '3306',
-    'dbname'   => 'Blog',
+    'dbname'   => 'blog',
     'user'     => 'blog_db_user',
     'password' => 'blog_db_user_pwd',
 );
