@@ -52,8 +52,9 @@ class Comment
      *
      * @var
      *
-    private $author;
      */
+    private $author;
+
 
     /**
      * Comment author email.
@@ -132,11 +133,16 @@ class Comment
         return $this;
     }
 
-    /*
+
     public function getAuthor() {
         return $this->author;
     }
 
+    public function setAuthor($author) {
+        $this->author = $author;
+        return $this;
+    }
+    /*
     public function setAuthor(User $author) {
         $this->author = $author;
         return $this;
