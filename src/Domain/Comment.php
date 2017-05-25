@@ -16,14 +16,14 @@ class Comment
      *
      * @var \Blog\Domain\Article
      */
-    private $article_id;
+    private $article;
 
     /**
      * Associated comment.
      *
      * @var \Blog\Domain\Comment
      */
-    private $parent_id;
+    private $parent;
 
     /**
      * Comment level.
@@ -88,21 +88,21 @@ class Comment
         return $this;
     }
 
-    public function getArticleId() {
-        return $this->article_id;
+    public function getArticle() {
+        return $this->article;
     }
 
-    public function setArticleId(Article $article_id) {
-        $this->article_id = $article_id;
+    public function setArticle($article) {
+        $this->article = $article;
         return $this;
     }
 
-    public function getParentId() {
-        return $this->parent_id;
+    public function getParent() {
+        return $this->parent;
     }
 
-    public function setParentId(Comment $parent_id) {
-        $this->parent_id = $parent_id;
+    public function setParent($parent) {
+        $this->parent = $parent;
         return $this;
     }
 

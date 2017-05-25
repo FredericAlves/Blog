@@ -7,8 +7,45 @@
     <h2>{{ article.title }}</h2>
     <p>{{ article.content }}</p>
     <h3>Commentaires</h3>
+
     {% for comment in comments %}
-        <strong>{{ comment.author }}</strong> a dit : {{ comment.content }}<br>
+        {% if comment.level == 0 %}
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <p class="post-meta">
+                    <p>ID = {{ comment.id }} Lvl = {{ comment.level }}</p>
+                    <strong>{{ comment.author }}</strong> a commenté : <p> {{ comment.content |  escape |  raw | nl2br}}</p>
+            </p>
+
+
+            </div>
+        </div>
+            {% elseif comment.level == 1 %}
+                <div class="panel panel-default col-lg-offset-1 col-md-offset-1 col-xs-offset-1">
+                    <div class="panel-body">
+                        <p class="post-meta">
+                        <p>ID = {{ comment.id }} ART_ID = {{ comment.article }} PARENT_ID = {{ comment.parent }} Lvl = {{ comment.level }} </p>
+                        <strong>{{ comment.author }}</strong> a commenté : <p> {{ comment.content |  escape |  raw | nl2br}}</p>
+                        </p>
+
+                    </div>
+                </div>
+        {% elseif comment.level == 2 %}
+            <div class="panel panel-default col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
+                <div class="panel-body">
+                    <p class="post-meta">
+                    <p>ID = {{ comment.id }} ART_ID = {{ comment.article }} PARENT_ID = {{ comment.parent }} Lvl = {{ comment.level }} </p>
+                    <strong>{{ comment.author }}</strong> a commenté : <p> {{ comment.content |  escape |  raw | nl2br}}</p>
+                    </p>
+
+                </div>
+            </div>
+        {% endif %}
+
+
+
+
+
     {% else %}
         Pas de commentaires.
     {% endfor %}

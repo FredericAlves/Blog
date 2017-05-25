@@ -3,7 +3,7 @@ drop table if exists article;
 
 CREATE TABLE article (
   id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  date_add datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  dateadd datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   date_last_edit datetime DEFAULT NULL,
   title varchar(100) NOT NULL,
   content text NOT NULL,

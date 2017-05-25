@@ -24,11 +24,11 @@ class CommentDAO extends DAO
      */
     public function findAllByArticle($articleId) {
         // The associated article is retrieved only once
-        $article = $this->articleDAO->find($articleId);
+        //$article = $this->articleDAO->find($articleId);
 
         // id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select id, content, author from comment where article_id=? order by id";
+        $sql = "select * from comment where article=? order by id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -37,7 +37,7 @@ class CommentDAO extends DAO
             $comId = $row['id'];
             $comment = $this->buildDomainObject($row);
             // The associated article is defined for the constructed comment
-            $comment->setArticleId($article);
+            //$comment->setArticleId($article);
             $comments[$comId] = $comment;
         }
         return $comments;
@@ -52,14 +52,22 @@ class CommentDAO extends DAO
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['id']);
-        $comment->setContent($row['content']);
+        $comment->setArticle($row['article']);
+        $comment->setParent($row['parent']);
+        $comment->setLevel($row['level']);
+        $comment->setDateAdd($row['date_add']);
+        $comment->setDateLastEdit($row['date_last_edit']);
         $comment->setAuthor($row['author']);
+        $comment->setEmail($row['email']);
+        $comment->setContent($row['content']);
+        $comment->setReport($row['report']);
+
 
         if (array_key_exists('art_id', $row)) {
             // Find and set the associated article
             $articleId = $row['id'];
             $article = $this->articleDAO->find($articleId);
-            $comment->setArticleId($article);
+            $comment->setArticle($article);
         }
 
         return $comment;
