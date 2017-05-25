@@ -16,15 +16,8 @@ class Article
      *
      * @var \DateTime
      */
-    private $date_add;
+    private $date;
 
-    /**
-     * Article date of last edit
-     *
-     * @var \DateTime
-     */
-
-    private $date_last_edit;
 
     /**
      * Article title.
@@ -50,21 +43,12 @@ class Article
         return $this;
     }
 
-    public function getDateAdd() {
-        return $this->date_add;
+    public function getDate() {
+        return $this->date;
     }
 
-    public function setDateAdd($date_add) {
-        $this->date_add = $date_add;
-        return $this;
-    }
-
-    public function getDateLastEdit() {
-        return $this->date_last_edit;
-    }
-
-    public function setDateLastEdit($date_last_edit) {
-        $this->date_last_edit = $date_last_edit;
+    public function setDate($date) {
+        $this->date = $date;
         return $this;
     }
 

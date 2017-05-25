@@ -16,36 +16,23 @@ class Comment
      *
      * @var \Blog\Domain\Article
      */
-    private $article;
+    private $article_id;
 
     /**
      * Associated comment.
      *
      * @var \Blog\Domain\Comment
      */
-    private $parent;
+    private $parent_id;
 
-    /**
-     * Comment level.
-     *
-     * @var integer
-     */
-    private $level;
 
     /**
      * Comment date
      *
      * @var \DateTime
      */
-    private $date_add;
+    private $date;
 
-    /**
-     * Comment date of last edit
-     *
-     * @var \DateTime
-     */
-
-    private $date_last_edit;
 
     /**
      * Comment author.
@@ -88,53 +75,34 @@ class Comment
         return $this;
     }
 
-    public function getArticle() {
-        return $this->article;
+    public function getArticleId() {
+        return $this->article_id;
     }
 
-    public function setArticle($article) {
-        $this->article = $article;
+    public function setArticleId($article_id) {
+        $this->article_id = $article_id;
         return $this;
     }
 
-    public function getParent() {
-        return $this->parent;
+    public function getParentId() {
+        return $this->parent_id;
     }
 
-    public function setParent($parent) {
-        $this->parent = $parent;
+    public function setParentId($parent_id) {
+        $this->parent_id = $parent_id;
         return $this;
     }
 
-    public function getLevel() {
-        return $this->level;
+    public function getDate() {
+        return $this->date;
     }
 
-    public function setLevel($level) {
-        $this->level = $level;
+    public function setDate($date) {
+        $this->date = $date;
         return $this;
     }
 
-    public function getDateAdd() {
-        return $this->date_add;
-    }
-
-    public function setDateAdd($date_add) {
-        $this->date_add = $date_add;
-        return $this;
-    }
-
-    public function getDateLastEdit() {
-        return $this->date_last_edit;
-    }
-
-    public function setDateLastEdit($date_last_edit) {
-        $this->date_last_edit = $date_last_edit;
-        return $this;
-    }
-
-
-    public function getAuthor() {
+     public function getAuthor() {
         return $this->author;
     }
 

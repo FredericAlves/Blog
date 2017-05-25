@@ -10,5 +10,18 @@ $app->get('/', function () use ($app) {
 $app->get('/article/{id}', function ($id) use ($app) {
     $article = $app['dao.article']->find($id);
     $comments = $app['dao.comment']->findAllByArticle($id);
-    return $app['twig']->render('article.html.twig', array('article' => $article, 'comments' => $comments));
+    $childrenComments = [];
+    $childrenCommentsLevel2 = [];
+    foreach ($comments as $comment) {
+        $childrenComments[$comment->getId()]= $app['dao.comment']->findAllChildren($comment);
+        foreach ($childrenComments[$comment->getId()] as $children) {
+            $childrenCommentsLevel2[$children->getId()]= $app['dao.comment']->findAllChildren($children);
+        }
+    }
+    return $app['twig']->render('article.html.twig', array(
+        'article' => $article,
+        'comments' => $comments,
+        'childrenComments' => $childrenComments,
+        'childrenCommentsLevel2' => $childrenCommentsLevel2,
+        ));
 })->bind('article');

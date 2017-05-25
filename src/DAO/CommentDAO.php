@@ -15,6 +15,16 @@ class CommentDAO extends DAO
         $this->articleDAO = $articleDAO;
     }
 
+    public function find($id)
+    {
+        $sql = "select * from comment where id=?";
+        $row = $this->getDb()->fetchAssoc($sql, array($id));
+        if ($row)
+            return $this->buildDomainObject($row);
+        else
+            throw new \Exception("No comment matching id " . $id);
+    }
+
     /**
      * Return a list of all comments for an article, sorted by date (most recent last).
      *
@@ -28,7 +38,7 @@ class CommentDAO extends DAO
 
         // id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select * from comment where article=? order by id";
+        $sql = "select * from comment where article_id=?  and parent_id is NULL order by id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
@@ -43,6 +53,20 @@ class CommentDAO extends DAO
         return $comments;
     }
 
+    public function findAllChildren($comment) {
+        $sql = "select * from comment where parent_id=?  order by id";
+        $result = $this->getDb()->fetchAll($sql, array($comment->getId()));
+        // Convert query result to an array of domain objects
+        $childrenComments = array();
+        foreach ($result as $row) {
+            $comId = $row['id'];
+            $childrenComment = $this->buildDomainObject($row);
+
+            $childrenComments[$comId] = $childrenComment;
+        }
+        return $childrenComments;
+    }
+
     /**
      * Creates an Comment object based on a DB row.
      *
@@ -52,24 +76,29 @@ class CommentDAO extends DAO
     protected function buildDomainObject(array $row) {
         $comment = new Comment();
         $comment->setId($row['id']);
-        $comment->setArticle($row['article']);
-        $comment->setParent($row['parent']);
-        $comment->setLevel($row['level']);
-        $comment->setDateAdd($row['date_add']);
-        $comment->setDateLastEdit($row['date_last_edit']);
+        $comment->setArticleId($row['article_id']);
+        $comment->setParentId($row['parent_id']);
+        $comment->setDate($row['date']);
         $comment->setAuthor($row['author']);
         $comment->setEmail($row['email']);
         $comment->setContent($row['content']);
         $comment->setReport($row['report']);
 
-
-        if (array_key_exists('art_id', $row)) {
+        /*
+        if (array_key_exists('article_id', $row)) {
             // Find and set the associated article
-            $articleId = $row['id'];
+            $articleId = $row['article_id'];
             $article = $this->articleDAO->find($articleId);
-            $comment->setArticle($article);
+            $comment->setArticleId($article);
         }
 
+        if (array_key_exists('parent_id', $row) && $row['parent_id']) {
+            // Find and set the associated article
+            $parentId = $row['parent_id'];
+            $parent = $this->find($parentId);
+            $comment->setParentId($parent);
+        }
+        */
         return $comment;
     }
 }
