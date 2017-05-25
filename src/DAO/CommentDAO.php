@@ -28,7 +28,7 @@ class CommentDAO extends DAO
 
         // id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select id, content, author from comment where id=? order by id";
+        $sql = "select id, content, author from comment where article_id=? order by id";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects
