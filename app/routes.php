@@ -1,15 +1,44 @@
 <?php
 
+use Symfony\Component\HttpFoundation\Request;
+use Blog\Domain\Comment;
+use Blog\Form\Type\CommentType;
+
+
+
 // Home page
-$app->get('/', function () use ($app) {
+/*$app->get('/', function () use ($app) {
     $articles = $app['dao.article']->findAll();
     return $app['twig']->render('index.html.twig', array('articles' => $articles));
 })->bind('home');
+*/
 
-// Article details with comments
-$app->get('/article/{id}', function ($id) use ($app) {
+$app->get('/',"Blog\Controller\FrontController::homeAction")
+
+    ->bind('home');
+
+
+/* Article details with comments
+$app->match('/article/{id}', function ($id, Request $request) use ($app) {
     $article = $app['dao.article']->find($id);
+
+    $commentFormView = null;
+
+    $comment = new Comment();
+    $comment->setArticleId($id);
+    $user = 'anonymous';
+    $comment->setAuthor($user);
+    $commentForm = $app['form.factory']->create(CommentType::class, $comment);
+    $commentForm->handleRequest($request);
+    if ($commentForm->isSubmitted() && $commentForm->isValid()) {
+        $app['dao.comment']->save($comment);
+        $app['session']->getFlashBag()->add('success', 'Votre commentaire a bien été ajouté.');
+    }
+    $commentFormView = $commentForm->createView();
+
     $comments = $app['dao.comment']->findAllByArticle($id);
+
+
     $childrenComments = [];
     $childrenCommentsLevel2 = [];
     foreach ($comments as $comment) {
@@ -23,5 +52,10 @@ $app->get('/article/{id}', function ($id) use ($app) {
         'comments' => $comments,
         'childrenComments' => $childrenComments,
         'childrenCommentsLevel2' => $childrenCommentsLevel2,
+        'commentForm' => $commentFormView
         ));
-})->bind('article');
+})->bind('article');*/
+
+// Article details with comments
+$app->match('/article/{id}', "Blog\Controller\FrontController::articleAction")
+    ->bind('article');

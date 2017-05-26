@@ -6,6 +6,7 @@
     <p>
     <h2>{{ article.title }}</h2>
     <p>{{ article.content }}</p>
+
     <h3>Commentaires</h3>
 
     {% for comment in comments %}
@@ -13,9 +14,31 @@
             <div class="panel-body">
                 <p class="post-meta">
                     <p>Comment Id = {{ comment.id }}</p>
-                    <strong>{{ comment.author }}</strong> a commenté : <p> {{ comment.content |  escape |  raw | nl2br}}</p>
-            </p>
+                    <strong>{{ comment.author }}</strong> a commenté :
+                    <p> {{ comment.content |  escape |  raw | nl2br}}</p>
+                </p>
             </div>
+            <h3>Add a comment</h3>
+            {% if commentForm %}
+                {{ form_start(commentForm) }}
+                    <div class="form-group">
+                        {{ form_errors(commentForm.content) }}
+                        {{ form_widget(commentForm.content, { 'attr':  {
+                            'rows': '4',
+                            'class': 'form-control',
+                            'placeholder': 'Enter your comment'
+                        }}) }}
+                    </div>
+                <div class="form-group">
+                        <input type="submit" class="btn btn-primary" value="Publish comment" />
+                </div>
+                {{ form_end(commentForm) }}
+            {% endif %}
+                {% for flashMessage in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success">
+                        {{ flashMessage }}
+                    </div>
+                {% endfor %}
         </div>
             {% for children in childrenComments[comment.id] %}
                 <div class="panel panel-default col-lg-offset-1 col-md-offset-1 col-xs-offset-1">
@@ -26,22 +49,64 @@
                          </p>
 
                     </div>
-                </div>
-                {% for children2 in childrenCommentsLevel2[children.id] %}
-                    <div class="panel panel-default col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
-                        <div class="panel-body">
-                            <p class="post-meta">
-                            <p>Comment Id = {{ children2.id }} ParentID = {{ children2.parentId }}</p>
-                                <strong>{{ children2.author }}</strong> a commenté :<p> {{ children2.content |  escape | nl2br}}</p>
-                            </p>
-
-
+                    <h3>Add a comment</h3>
+                    {% if commentForm %}
+                        {{ form_start(commentForm) }}
+                        <div class="form-group">
+                            {{ form_errors(commentForm.content) }}
+                            {{ form_widget(commentForm.content, { 'attr':  {
+                                'rows': '4',
+                                'class': 'form-control',
+                                'placeholder': 'Enter your comment'
+                            }}) }}
                         </div>
-                    </div>
-                {%  endfor %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-primary" value="Publish comment" />
+                        </div>
+                        {{ form_end(commentForm) }}
+                    {% endif %}
+                    {% for flashMessage in app.session.flashbag.get('success') %}
+                        <div class="alert alert-success">
+                            {{ flashMessage }}
+                        </div>
+                    {% endfor %}
+                </div>
+                        {% for children2 in childrenCommentsLevel2[children.id] %}
+                            <div class="panel panel-default col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
+                                <div class="panel-body">
+                                    <p class="post-meta">
+                                    <p>Comment Id = {{ children2.id }} ParentID = {{ children2.parentId }}</p>
+                                        <strong>{{ children2.author }}</strong> a commenté :<p> {{ children2.content |  escape | nl2br}}</p>
+                                    </p>
+
+
+                                </div>
+                                <h3>Add a comment</h3>
+                                {% if commentForm %}
+                                    {{ form_start(commentForm) }}
+                                    <div class="form-group">
+                                        {{ form_errors(commentForm.content) }}
+                                        {{ form_widget(commentForm.content, { 'attr':  {
+                                            'rows': '4',
+                                            'class': 'form-control',
+                                            'placeholder': 'Enter your comment'
+                                        }}) }}
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-primary" value="Publish comment" />
+                                    </div>
+                                    {{ form_end(commentForm) }}
+                                {% endif %}
+                                {% for flashMessage in app.session.flashbag.get('success') %}
+                                    <div class="alert alert-success">
+                                        {{ flashMessage }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        {%  endfor %}
             {%  endfor %}
-    {% else %}
-        Pas de commentaires.
+        {% else %}
+            Pas de commentaires.
     {% endfor %}
     </p>
 {% endblock %}

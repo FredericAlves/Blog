@@ -101,4 +101,25 @@ class CommentDAO extends DAO
         */
         return $comment;
     }
+
+    public function save(Comment $comment)
+    {
+        $commentData = array(
+            'article_id' => $comment->getArticleId($comment->getId()),
+            'parent_id' => $comment->getParentId($comment->getId()),
+            'author' => $comment->getAuthor($comment->getId()),
+            'content' => $comment->getContent()
+        );
+
+        if ($comment->getId()) {
+            // The comment has already been saved : update it
+            $this->getDb()->update('comment', $commentData, array('id' => $comment->getId()));
+        } else {
+            // The comment has never been saved : insert it
+            $this->getDb()->insert('comment', $commentData);
+            // Get the id of the newly created comment and set it on the entity.
+            $id = $this->getDb()->lastInsertId();
+            $comment->setId($id);
+        }
+    }
 }

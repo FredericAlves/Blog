@@ -16,11 +16,16 @@ $app->register(new Silex\Provider\AssetServiceProvider(), array(
     'assets.version' => 'v1'
 ));
 
+$app->register(new Silex\Provider\SessionServiceProvider());
+
+$app->register(new Silex\Provider\FormServiceProvider());
+$app->register(new Silex\Provider\LocaleServiceProvider());
+$app->register(new Silex\Provider\TranslationServiceProvider());
+
 // Register services.
 $app['dao.article'] = function ($app) {
     return new Blog\DAO\ArticleDAO($app['db']);
 };
-
 $app['dao.comment'] = function ($app) {
     $commentDAO = new Blog\DAO\CommentDAO($app['db']);
     //$commentDAO->setArticleDAO($app['dao.article']);
