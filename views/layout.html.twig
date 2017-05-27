@@ -12,7 +12,7 @@
 <div class="container">
     <nav class="navbar navbar-default navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header page-scroll">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-target">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -27,5 +27,18 @@
     <div id="content">{% block content %}{% endblock %}</div>
     <footer class="footer">Billet simple pour l'Alaska</footer>
 </div>
+<!-- Le JS... -->
+<script type="text/javascript">
+    function toggle_div(bouton, id, textAjout, textAnnul) { // On déclare la fonction toggle_div qui prend en param le bouton et un id
+        var div = document.getElementById(id); // On récupère le div ciblé grâce à l'id
+        if(div.style.display=="none") { // Si le div est masqué...
+            div.style.display = "block"; // ... on l'affiche...
+            bouton.innerHTML = textAnnul; // ... et on change le contenu du bouton.
+        } else { // S'il est visible...
+            div.style.display = "none"; // ... on le masque...
+            bouton.innerHTML = textAjout; // ... et on change le contenu du bouton.
+        }
+    }
+</script>
 </body>
 </html>

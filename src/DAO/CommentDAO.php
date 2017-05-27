@@ -38,7 +38,7 @@ class CommentDAO extends DAO
 
         // id is not selected by the SQL query
         // The article won't be retrieved during domain objet construction
-        $sql = "select * from comment where article_id=?  and parent_id is NULL order by id";
+        $sql = "select * from comment where article_id=?  and parent_id is NULL order by id DESC ";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
         // Convert query result to an array of domain objects

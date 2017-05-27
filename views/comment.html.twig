@@ -1,0 +1,51 @@
+
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <p class="post-meta">
+            <p>Comment Id = {{ comment.id }}</p>
+            <strong>{{ comment.author }}</strong> a commenté :
+            <p> {{ comment.content |  escape |  raw | nl2br}}</p>
+
+            <button type="button" onclick="toggle_div(this,'div_reponse.{{ comment.id }}','Répondre','Annuler');">Répondre</button>
+            <div id="div_reponse.{{ comment.id }}" style="display:none;"> zone de réponse {{ comment.id }} </div>
+
+            </p>
+        </div>
+
+
+
+    </div>
+    {% for children in childrenComments[comment.id] %}
+        <div class="panel panel-default col-lg-offset-1 col-md-offset-1 col-xs-offset-1">
+            <div class="panel-body">
+                <p class="post-meta">
+                <p>Children Id = {{ children.id }} ParentID = {{ children.parentId }}</p>
+                <strong>{{ children.author }}</strong> a commenté :<p> {{ children.content |  escape | nl2br}}</p>
+
+                <button type="button" onclick="toggle_div(this,'div_reponse.{{ children.id }}','Répondre','Annuler');">Répondre</button>
+                <div id="div_reponse.{{ children.id }}" style="display:none;"> zone de réponse {{ children.id }} </div>
+
+                </p>
+
+            </div>
+
+        </div>
+        {% for children2 in childrenCommentsLevel2[children.id] %}
+            <div class="panel panel-default col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
+                <div class="panel-body">
+                    <p class="post-meta">
+                    <p>Children2 Id = {{ children2.id }} ParentID = {{ children2.parentId }}</p>
+                    <strong>{{ children2.author }}</strong> a commenté :<p> {{ children2.content |  escape | nl2br}}</p>
+
+                    <button type="button" onclick="toggle_div(this,'div_reponse.{{ children2.id }}','Répondre','Annuler');">Répondre</button>
+                    <div id="div_reponse.{{ children2.id }}" style="display:none;"> zone de réponse {{ children2.id }} </div>
+
+                    </p>
+
+
+                </div>
+            </div>
+        {%  endfor %}
+    {%  endfor %}
+
+

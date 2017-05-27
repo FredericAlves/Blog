@@ -36,6 +36,7 @@ class FrontController {
         }
         $commentFormView = $commentForm->createView();
 
+
         $comments = $app['dao.comment']->findAllByArticle($id);
 
 
@@ -56,47 +57,5 @@ class FrontController {
         ));
     }
 
-    // Ajouter un commentaire et commentaires enfants
-    public function addCommentAction(  $id, $parentId, Request $request, Application $app)
-    {
-        $article = $app['dao.article']->find($id);
-        $comment = new Comment();
-        $comment->setArticle($article);
-        if ($parentId) {
-            $parent = $app['dao.comment']->find($parentId);
-            $comment->setParent($parent);
-        }
-        $commentForm = $app['form.factory']->create(CommentType::class, $comment);
-        $commentForm->handleRequest($request);
-        if ($commentForm->isSubmitted() && $commentForm->isValid()) {
-            $app['dao.comment']->save($comment);
-            $app['session']->getFlashBag()->add('success', 'Le commentaire a été créé.');
-            return $app->redirect($app['url_generator']->generate('article', ['id'=>$id]));
-        }
-        return $app['twig']->render('comment_form.html.twig', array(
-            'article' => $article,
-            'commentForm' => $commentForm->createView()));
-    }
 
-    // Signalement commentaire
-    public function signalAction(  $id,  Application $app)
-    {
-        $comment = $app['dao.comment']->find($id);
-        $app['dao.comment']->addSignal($comment);
-        $app['session']->getFlashBag()->add('success', 'Le commentaire a été signalé au modérateur.');
-        return $app->redirect($app['url_generator']->generate('article', ['id' => $comment->getArticle()->getId()]));
-    }
-
-    // Page de Login
-    public function loginAction(Request $request, Application $app) {
-        return $app['twig']->render('login.html.twig', array(
-            'error'         => $app['security.last_error']($request),
-            'last_username' => $app['session']->get('_security.last_username'),
-        ));
-    }
-
-    // Page à propos
-    public function aboutAction(Application $app) {
-        return $app['twig']->render('about.html.twig');
-    }
 }

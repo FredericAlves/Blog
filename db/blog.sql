@@ -3,8 +3,7 @@ drop table if exists article;
 
 CREATE TABLE article (
   id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
-  dateadd datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  date_last_edit datetime DEFAULT NULL,
+  date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   title varchar(100) NOT NULL,
   content text NOT NULL,
   PRIMARY KEY (id)
@@ -15,9 +14,8 @@ CREATE TABLE comment (
   id smallint(5) UNSIGNED NOT NULL AUTO_INCREMENT,
   article_id smallint(5) UNSIGNED NOT NULL,
   parent_id smallint(5) UNSIGNED NOT NULL,
-  level tinyint(3) UNSIGNED NOT NULL DEFAULT '0',
-  date_add datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  date_last_edit datetime DEFAULT NULL,
+  level tinyint(5) UNSIGNED NOT NULL DEFAULT '0',
+  date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   author varchar(100) NOT NULL,
   email varchar(255) DEFAULT NULL,
   content longtext NOT NULL,
