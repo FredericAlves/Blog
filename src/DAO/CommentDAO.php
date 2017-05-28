@@ -54,7 +54,7 @@ class CommentDAO extends DAO
     }
 
     public function findAllChildren($comment) {
-        $sql = "select * from comment where parent_id=?  order by id";
+        $sql = "select * from comment where parent_id=?  order by id DESC";
         $result = $this->getDb()->fetchAll($sql, array($comment->getId()));
         // Convert query result to an array of domain objects
         $childrenComments = array();

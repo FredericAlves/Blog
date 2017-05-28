@@ -6,8 +6,27 @@
             <strong>{{ comment.author }}</strong> a commenté :
             <p> {{ comment.content |  escape |  raw | nl2br}}</p>
 
-            <button type="button" onclick="toggle_div(this,'div_reponse.{{ comment.id }}','Répondre','Annuler');">Répondre</button>
-            <div id="div_reponse.{{ comment.id }}" style="display:none;"> zone de réponse {{ comment.id }} </div>
+            <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ comment.id }}','Répondre','Annuler');">Répondre</button>
+
+            <div id="div_reponse.{{ comment.id }}" style="display:none;">
+                zone de réponse {{ comment.id }}
+
+                <div class="form-group">
+                <form method="post" action="/comment/{{ article.id }}/{{ comment.id }}">
+                    <input name="id" id=$id  type="hidden" value="{{ article.id }}">
+                    <input name="commentId" id=$commentId type="hidden" value="{{ comment.id }}">
+                    <input type="text" name="content" id=$content placeholder="Entrez votre réponse">
+                    <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
+                    </button>
+                </form>
+
+                </div>
+            </div>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div class="alert alert-success">
+                    {{ flashMessage }}
+                </div>
+            {% endfor %}
 
             </p>
         </div>
@@ -37,14 +56,14 @@
                     <p>Children2 Id = {{ children2.id }} ParentID = {{ children2.parentId }}</p>
                     <strong>{{ children2.author }}</strong> a commenté :<p> {{ children2.content |  escape | nl2br}}</p>
 
-                    <button type="button" onclick="toggle_div(this,'div_reponse.{{ children2.id }}','Répondre','Annuler');">Répondre</button>
-                    <div id="div_reponse.{{ children2.id }}" style="display:none;"> zone de réponse {{ children2.id }} </div>
+
 
                     </p>
 
 
                 </div>
             </div>
+
         {%  endfor %}
     {%  endfor %}
 

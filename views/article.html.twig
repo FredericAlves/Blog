@@ -11,33 +11,27 @@
 
     <button type="button" class="btn btn-primary" onclick="toggle_div(this,'id_du_div','Ajouter un commentaire','Annuler');">Ajouter un commentaire</button>
     <div id="id_du_div" style="display:none;">
-        {% if commentForm %}
-            {{ form_start(commentForm) }}
-            <div class="form-group">
-                {{ form_errors(commentForm.content) }}
-                {{ form_widget(commentForm.content, { 'attr':  {
-                    'rows': '4',
-                    'class': 'form-control',
-                    'placeholder': 'Enter your comment'
-                }}) }}
-            </div>
-            <div class="form-group">
+        <div class="form-group">
+            <form method="post" action="/comment/{{ article.id }}/0">
+                <input name="id" id=$id  type="hidden" value="{{ article.id }}">
+                {#<input name="commentId" id=$commentId type="hidden" value="">#}
+                <input type="text" name="content" id=$content placeholder="Entrez votre réponse">
                 <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
-            </div>
-            {{ form_end(commentForm) }}
-        {% endif %}
-        {% for flashMessage in app.session.flashbag.get('success') %}
-            <div class="alert alert-success">
-                {{ flashMessage }}
-            </div>
-        {% endfor %}
+                </button>
+            </form>
+
+        </div>
     </div>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
     <p></p>
     {% if comments %}
         {% for comment in comments %}
             {#We include comment template#}
             {% include 'comment.html.twig' %}
-            <hr class="commentBloc">
         {% endfor %}
         {#If there are no comment for an article, we display a simple string#}
     {% else %}
