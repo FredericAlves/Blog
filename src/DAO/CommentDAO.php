@@ -9,12 +9,12 @@ class CommentDAO extends DAO
     /**
      * @var \Blog\DAO\ArticleDAO
      */
-    private $articleDAO;
+    /*private $articleDAO;
 
     public function setArticleDAO(ArticleDAO $articleDAO) {
         $this->articleDAO = $articleDAO;
     }
-
+*/
     public function find($id)
     {
         $sql = "select * from comment where id=?";
@@ -23,6 +23,24 @@ class CommentDAO extends DAO
             return $this->buildDomainObject($row);
         else
             throw new \Exception("No comment matching id " . $id);
+    }
+
+    /**
+     * Returns a list of all comments, sorted by date (most recent first).
+     *
+     * @return array A list of all comments.
+     */
+    public function findAll() {
+        $sql = "select * from comment order by id desc";
+        $result = $this->getDb()->fetchAll($sql);
+
+        // Convert query result to an array of domain objects
+        $entities = array();
+        foreach ($result as $row) {
+            $id = $row['id'];
+            $entities[$id] = $this->buildDomainObject($row);
+        }
+        return $entities;
     }
 
     /**
@@ -121,4 +139,6 @@ class CommentDAO extends DAO
             $comment->setId($id);
         }
     }
+
+
 }

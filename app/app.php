@@ -13,6 +13,13 @@ $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
     'twig.path' => __DIR__.'/../views',
 ));
+
+$app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
+    $twig->addExtension(new Twig_Extensions_Extension_Text());
+    return $twig;
+});
+$app->register(new Silex\Provider\ValidatorServiceProvider());
+
 $app->register(new Silex\Provider\AssetServiceProvider(), array(
     'assets.version' => 'v1'
 ));
@@ -47,4 +54,7 @@ $app['dao.comment'] = function ($app) {
     $commentDAO = new Blog\DAO\CommentDAO($app['db']);
     //$commentDAO->setArticleDAO($app['dao.article']);
     return $commentDAO;
+};
+$app['dao.user'] = function ($app) {
+    return new Blog\DAO\UserDAO($app['db']);
 };

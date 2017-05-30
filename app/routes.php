@@ -16,3 +16,11 @@ $app->match('/article/{id}/add_comment', "Blog\Controller\FrontController::addCo
 // Login form
 $app->get('/login', "Blog\Controller\FrontController::loginAction")
     ->bind('login');
+
+// Admin home page
+$app->get('/admin', "Blog\Controller\AdminController::indexAction")
+    ->bind('admin');
+
+// add a new article
+$app->match('/admin/article/add', "Blog\Controller\AdminController::addArticle")
+    ->bind('add-article');

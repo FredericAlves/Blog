@@ -20,7 +20,7 @@ CREATE TABLE comment (
   content longtext NOT NULL,
   report smallint(5) UNSIGNED NOT NULL DEFAULT '0',
   PRIMARY KEY (id),
-  constraint fk_com_bil foreign key(article_id) references article(id),
+  CONSTRAINT del_casc FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
   constraint fk_com_com foreign key(parent_id) references comment(id)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 
