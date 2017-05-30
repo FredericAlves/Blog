@@ -11,47 +11,32 @@
         </div>
     {% endfor %}
     <div class="well">
-    <form method="post" action="/admin/article/add">
+
+    <form method="post" action="/admin/article/save">
 
         <div class="row">
-            <div class="form-control">
-            <div class="input-field col s6">
-                <label for="title">Titre :</label>
-                <input type="text" name="title" id=$title required>
 
+            <div class="form-control">
+                <div class="input-field col s6">
+                    <label for="title">Titre :</label>
+                    <input type="text" name="title" id=$title required>
+                </div>
             </div>
-            </div>
-            <div class="input-field col s12">
+
+            <div class="form-group">
+                <div class="col-sm-6">
                 <textarea type="textarea" name="content" id=$content  required></textarea>
                 <label for="content">Contenu :</label>
+                </div>
             </div>
-            <input type="submit" class="btn btn-primary" value="Publier l'article" />
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-3">
+                    <input type="submit" class="btn btn-primary" value="Publier l'article" />
+                </div>
+            </div>
         </div>
     </form>
     </div>
 
-    <div class="well">
 
-        <div class="form-group">
-
-            <div class="col-sm-6">
-                titre
-            </div>
-
-        </div>
-
-        <div class="form-group">
-
-            <div class="col-sm-6">
-                contenu
-            </div>
-
-        </div>
-        <div class="form-group">
-            <div class="col-sm-offset-4 col-sm-3">
-                <input type="submit" class="btn btn-primary" value="Save" />
-            </div>
-        </div>
-
-    </div>
 {% endblock %}

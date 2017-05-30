@@ -21,6 +21,16 @@ $app->get('/login', "Blog\Controller\FrontController::loginAction")
 $app->get('/admin', "Blog\Controller\AdminController::indexAction")
     ->bind('admin');
 
-// add a new article
-$app->match('/admin/article/add', "Blog\Controller\AdminController::addArticle")
-    ->bind('add-article');
+// Page to add a new article
+$app->get('/admin/new_article/',function () use ($app) {
+    return $app['twig']->render('article_form.html.twig', array('title' => 'Nouveau billet'));
+})->bind('new-article');
+
+// save a new article
+$app->match('/admin/article/save', "Blog\Controller\AdminController::saveArticle")
+    ->bind('save-article');
+
+// del an article
+$app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticle")
+    ->bind('admin_article_delete');
+

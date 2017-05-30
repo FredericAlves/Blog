@@ -5,6 +5,7 @@ namespace Blog\Controller;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\Request;
 use Blog\Domain\Article;
+use Blog\Domain\Comment;
 use Blog\Domain\User;
 //use Blog\Form\Type\ArticleType;
 //use Blog\Form\Type\CommentType;
@@ -28,28 +29,31 @@ class AdminController
         ));
     }
 
-    //Add a new article
-    public function addArticle(Application $app)
-    {
 
-        return $app['twig']->render('article_form.html.twig', array(
-            'title' => 'New article',
-            ));
+    //save a new article
+    public function saveArticle(Application $app)
+    {
+        $article=new article();
+        $article->setTitle(htmlspecialchars($_POST['title']));
+        $article->setContent(htmlspecialchars($_POST['content']));
+
+        $app['dao.article']->save($article);
+        $app['session']->getFlashBag()->add('success', 'Votre billet a bien été publié.');
+
+        return $this->indexAction($app);
 
 
     }
 
+    // Del an article
+    public function deleteArticle($id, Application $app)
+    {
+
+        $app['dao.article']->delete($id);
+        $app['session']->getFlashBag()->add('success', 'L\'article a été supprimé');
+        // Redirection page d'accueil administration
+        return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
+
 }
-/*$comment = new Comment();
-$comment->setArticleId($_POST['id']);
-if (isset($_POST['commentId'])) {
-    $comment->setParentId($_POST['commentId']);
-};
-$comment->setContent(htmlspecialchars($_POST['content']));
-if (isset($_POST['author']) and $_POST['author']!='') {
-    $comment->setAuthor(htmlspecialchars($_POST['author']));
-} else {
-    $comment->setAuthor("Anonyme");
-};
-$app['dao.comment']->save($comment);
-$app['session']->getFlashBag()->add('success', 'Votre commentaire a bien été ajouté.');*/
