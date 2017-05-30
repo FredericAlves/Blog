@@ -2,31 +2,32 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <p class="post-meta">
-            <p>Comment Id = {{ comment.id }}</p>
-            <strong>{{ comment.author }}</strong> a commenté :
+
+                Le {{ comment.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ comment.author }}</strong> a commenté :
             <p> {{ comment.content |  escape |  raw | nl2br}}</p>
 
             <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ comment.id }}','Répondre','Annuler');">Répondre</button>
 
             <div id="div_reponse.{{ comment.id }}" style="display:none;">
-                zone de réponse {{ comment.id }}
-
-                <div class="form-group">
-                <form method="post" action="/comment/{{ article.id }}/{{ comment.id }}">
+                <form method="post" action="/article/{{ article.id }}/add_comment">
                     <input name="id" id=$id  type="hidden" value="{{ article.id }}">
                     <input name="commentId" id=$commentId type="hidden" value="{{ comment.id }}">
-                    <input type="text" name="content" id=$content placeholder="Entrez votre réponse">
-                    <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
-                    </button>
+                    <div class="row">
+
+                        <div class="input-field col s6">
+                            <input type="text" name="author" id=$author >
+                            <label for="author">Votre nom</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <textarea type="textarea" name="content" id=$content placeholder="Entrez votre commentaire" required></textarea>
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
+                    </div>
                 </form>
 
-                </div>
+
             </div>
-            {% for flashMessage in app.session.flashbag.get('success') %}
-                <div class="alert alert-success">
-                    {{ flashMessage }}
-                </div>
-            {% endfor %}
+            </button>
 
             </p>
         </div>
@@ -38,11 +39,34 @@
         <div class="panel panel-default col-lg-offset-1 col-md-offset-1 col-xs-offset-1">
             <div class="panel-body">
                 <p class="post-meta">
-                <p>Children Id = {{ children.id }} ParentID = {{ children.parentId }}</p>
+
                 <strong>{{ children.author }}</strong> a commenté :<p> {{ children.content |  escape | nl2br}}</p>
 
-                <button type="button" onclick="toggle_div(this,'div_reponse.{{ children.id }}','Répondre','Annuler');">Répondre</button>
-                <div id="div_reponse.{{ children.id }}" style="display:none;"> zone de réponse {{ children.id }} </div>
+                <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ children.id }}','Répondre','Annuler');">Répondre</button>
+
+                <div id="div_reponse.{{ children.id }}" style="display:none;">
+
+
+
+                    <form method="post" action="/article/{{ article.id }}/add_comment">
+                        <input name="id" id=$id  type="hidden" value="{{ article.id }}">
+                        <input name="commentId" id=$commentId type="hidden" value="{{ comment.id }}">
+                        <div class="row">
+
+                            <div class="input-field col s6">
+                                <input type="text" name="author" id=$author >
+                                <label for="author">Votre nom</label>
+                            </div>
+                            <div class="input-field col s12">
+                                <textarea type="textarea" name="content" id=$content placeholder="Entrez votre commentaire" required></textarea>
+                            </div>
+                            <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
+                        </div>
+                    </form>
+
+
+                </div>
+                </button>
 
                 </p>
 

@@ -18,3 +18,8 @@ body {
     margin-bottom: 20px;
 }
 
+textarea        {
+    width:50% ;
+    height:150px;
+
+}

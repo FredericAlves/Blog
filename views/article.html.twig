@@ -11,17 +11,25 @@
 
     <button type="button" class="btn btn-primary" onclick="toggle_div(this,'id_du_div','Ajouter un commentaire','Annuler');">Ajouter un commentaire</button>
     <div id="id_du_div" style="display:none;">
-        <div class="form-group">
-            <form method="post" action="/comment/{{ article.id }}/0">
+
+            <form method="post" action="/article/{{ article.id }}/add_comment">
                 <input name="id" id=$id  type="hidden" value="{{ article.id }}">
                 {#<input name="commentId" id=$commentId type="hidden" value="">#}
-                <input type="text" name="content" id=$content placeholder="Entrez votre réponse">
+                <div class="row">
+
+                    <div class="input-field col s6">
+                        <input type="text" name="author" id=$author >
+                        <label for="author">Votre nom</label>
+                    </div>
+                    <div class="input-field col s12">
+                    <textarea type="textarea" name="content" id=$content placeholder="Entrez votre commentaire" required></textarea>
+                    </div>
                 <input type="submit" class="btn btn-primary" value="Publier le commentaire" />
-                </button>
+                </div>
             </form>
 
         </div>
-    </div>
+
     {% for flashMessage in app.session.flashbag.get('success') %}
         <div class="alert alert-success">
             {{ flashMessage }}
