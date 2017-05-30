@@ -80,7 +80,6 @@ class CommentDAO extends DAO
         $comment->setParentId($row['parent_id']);
         $comment->setDate($row['date']);
         $comment->setAuthor($row['author']);
-        $comment->setEmail($row['email']);
         $comment->setContent($row['content']);
         $comment->setReport($row['report']);
 

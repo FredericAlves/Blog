@@ -1,6 +1,7 @@
 <?php
 namespace Blog\Controller;
 use Silex\Application;
+use Symfony\Component\HttpFoundation\Request;
 use Blog\Domain\Comment;
 
 
@@ -63,6 +64,14 @@ class FrontController {
 
         return $this->articleAction($id,$app);
 
+    }
+
+    // Login page
+    public function loginAction(Request $request, Application $app) {
+        return $app['twig']->render('login.html.twig', array(
+            'error'         => $app['security.last_error']($request),
+            'last_username' => $app['session']->get('_security.last_username'),
+        ));
     }
 
 }
