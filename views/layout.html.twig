@@ -46,6 +46,13 @@
             </div>
         </div><!-- /.container -->
     </nav>
+    {% block header %}
+        <header class="intro-header">
+            <div class="site-heading">
+                <h1>Billet simple pour l'Alaska</h1>
+            </div>
+        </header>
+    {% endblock %}
     <div id="content">{% block content %}{% endblock %}</div>
     <footer class="footer">Blog de Jean Forteroche</footer>
 </div>

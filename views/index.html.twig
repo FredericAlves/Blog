@@ -9,4 +9,7 @@
             <p>{{ article.content | truncate (300) | striptags | raw }}</p>
         </article>
     {% endfor %}
+    <p class="scrollToTop">
+        <a href="#"><i class="glyphicon glyphicon-chevron-up" style="color: #880716"></i></a>
+    </p>
 {% endblock %}

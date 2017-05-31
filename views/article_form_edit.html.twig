@@ -23,11 +23,18 @@
                 </div>
             </div>
             <div class="row">
-                <button type="submit" class="waves-effect waves-light btn orange accent-2">
-                    Modifier
-                </button>
+                <input type="submit" class="btn btn-primary" value="Modifier l'article" formnovalidate="true"/>
             </div>
-            <p>A noter : votre article sera directement publié et accessible sur votre site.</p>
+
         </form>
     </div>
+    {% block javascript %}
+        {{ parent() }}
+        <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
+        <script type="text/javascript">
+            tinymce.init({
+                selector: 'textarea'
+            });
+        </script>
+    {% endblock %}
 {% endblock %}

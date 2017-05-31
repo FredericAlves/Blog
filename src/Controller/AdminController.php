@@ -30,7 +30,7 @@ class AdminController
     }
 
 
-    //save a new article
+    //save  a new article or update an article
     public function saveArticle(Application $app)
     {
         $article=new article();
