@@ -39,7 +39,7 @@
             <div class="panel-body">
                 <p class="post-meta">
 
-                    Le {{ children.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ children.author }}</strong> a commenté :<p> {{ children.content |  escape | nl2br}}</p>
+                    Le {{ children.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ children.author }}</strong> a répondu :<p> {{ children.content |  escape | nl2br}}</p>
 
                 <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ children.id }}','Répondre','Annuler');">Répondre</button>
 
@@ -76,7 +76,7 @@
             <div class="panel panel-default col-lg-offset-2 col-md-offset-2 col-xs-offset-2">
                 <div class="panel-body">
                     <p class="post-meta">
-                        Le {{ children2.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ children2.author }}</strong> a commenté :<p> {{ children2.content |  escape | nl2br}}</p>
+                        Le {{ children2.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ children2.author }}</strong> a répondu :<p> {{ children2.content |  escape | nl2br}}</p>
 
 
 

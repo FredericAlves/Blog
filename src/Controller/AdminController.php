@@ -34,13 +34,25 @@ class AdminController
     public function saveArticle(Application $app)
     {
         $article=new article();
-        $article->setTitle(htmlspecialchars($_POST['title']));
-        $article->setContent(htmlspecialchars($_POST['content']));
+        if (isset($_POST['id']) and$_POST['id']!='') {
+            $article->setId($_POST['id']);
+        }
+        $article->setTitle($_POST['title']);
+        $article->setContent($_POST['content']);
 
         $app['dao.article']->save($article);
         $app['session']->getFlashBag()->add('success', 'Votre billet a bien été publié.');
 
         return $this->indexAction($app);
+
+
+    }
+
+    public function editArticle($id, Application $app)
+    {
+        $article = $app['dao.article']->find($id);
+
+        return $app['twig']->render('article_form_edit.html.twig', array('article'=>$article));
 
 
     }

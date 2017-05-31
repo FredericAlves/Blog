@@ -1,0 +1,33 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Ajouter un article{% endblock %}
+
+{% block content %}
+    <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
+        <a href="/admin"><div id="return-update">Retour à la liste des articles</div></a>
+
+        <form action="/admin/article/add" id="form-article" method="post">
+            <div class="row">
+                <input name="id" id=$id  type="hidden" value="{{ article.id }}">
+                <div class="input-field col s12">
+                    <input value ="{{ article.title }}" type="text" name="title" id=$title class="validate" data-error="wrong" data-success="right" required/>
+                    <label for="title">Titre</label>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="input-field col s12">
+                    <label for="content">Contenu</label>
+                    <textarea id=$content name="content" rows="20" class="materialize-textarea wysiwyg">{{ article.content }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <button type="submit" class="waves-effect waves-light btn orange accent-2">
+                    Modifier
+                </button>
+            </div>
+            <p>A noter : votre article sera directement publié et accessible sur votre site.</p>
+        </form>
+    </div>
+{% endblock %}

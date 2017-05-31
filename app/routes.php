@@ -27,8 +27,12 @@ $app->get('/admin/new_article/',function () use ($app) {
 })->bind('new-article');
 
 // save a new article
-$app->match('/admin/article/save', "Blog\Controller\AdminController::saveArticle")
+$app->match('/admin/article/add', "Blog\Controller\AdminController::saveArticle")
     ->bind('save-article');
+
+// edit an article
+$app->match('/admin/article/{id}/edit', "Blog\Controller\AdminController::editArticle")
+    ->bind('edit-article');
 
 // del an article
 $app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticle")
