@@ -13,6 +13,10 @@ $app->match('/article/{id}', "Blog\Controller\FrontController::articleAction")
 $app->match('/article/{id}/add_comment', "Blog\Controller\FrontController::addComment")
     ->bind('add-comment');
 
+// Report a comment
+$app->match('/comment/{id}/report', "Blog\Controller\FrontController::reportAction")
+    ->bind('report_comment');
+
 // Login form
 $app->get('/login', "Blog\Controller\FrontController::loginAction")
     ->bind('login');

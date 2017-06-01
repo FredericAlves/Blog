@@ -11,11 +11,14 @@ ExceptionHandler::register();
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 
 $app->register(new Silex\Provider\TwigServiceProvider(), array(
+    'debug'=>true,
     'twig.path' => __DIR__.'/../views',
 ));
 
+
 $app['twig'] = $app->extend('twig', function(Twig_Environment $twig, $app) {
     $twig->addExtension(new Twig_Extensions_Extension_Text());
+    $twig->addExtension(new \Twig_Extension_Debug());
     return $twig;
 });
 $app->register(new Silex\Provider\ValidatorServiceProvider());

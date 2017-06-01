@@ -6,15 +6,8 @@ use Blog\Domain\Comment;
 
 class CommentDAO extends DAO
 {
-    /**
-     * @var \Blog\DAO\ArticleDAO
-     */
-    /*private $articleDAO;
 
-    public function setArticleDAO(ArticleDAO $articleDAO) {
-        $this->articleDAO = $articleDAO;
-    }
-*/
+
     public function find($id)
     {
         $sql = "select * from comment where id=?";
@@ -31,7 +24,7 @@ class CommentDAO extends DAO
      * @return array A list of all comments.
      */
     public function findAll() {
-        $sql = "select * from comment order by id desc";
+        $sql = "select comment.id, comment.article_id, comment.parent_id, comment.date, comment.author, comment.content, comment.report, article.title as title from comment, article where comment.article_id=article.id order by comment.report DESC, comment.id desc ";
         $result = $this->getDb()->fetchAll($sql);
 
         // Convert query result to an array of domain objects
@@ -85,6 +78,13 @@ class CommentDAO extends DAO
         return $childrenComments;
     }
 
+    // report a comment
+    public function reportComment($comment)
+    {
+        $comment->setReport(true);
+        $this->save($comment);
+    }
+
     /**
      * Creates an Comment object based on a DB row.
      *
@@ -100,22 +100,10 @@ class CommentDAO extends DAO
         $comment->setAuthor($row['author']);
         $comment->setContent($row['content']);
         $comment->setReport($row['report']);
-
-        /*
-        if (array_key_exists('article_id', $row)) {
-            // Find and set the associated article
-            $articleId = $row['article_id'];
-            $article = $this->articleDAO->find($articleId);
-            $comment->setArticleId($article);
+        if (array_key_exists('title', $row)){
+            $comment->setArticleTitle($row['title']);
         }
 
-        if (array_key_exists('parent_id', $row) && $row['parent_id']) {
-            // Find and set the associated article
-            $parentId = $row['parent_id'];
-            $parent = $this->find($parentId);
-            $comment->setParentId($parent);
-        }
-        */
         return $comment;
     }
 
@@ -125,7 +113,8 @@ class CommentDAO extends DAO
             'article_id' => $comment->getArticleId($comment->getId()),
             'parent_id' => $comment->getParentId($comment->getId()),
             'author' => $comment->getAuthor($comment->getId()),
-            'content' => $comment->getContent()
+            'content' => $comment->getContent(),
+            'report' => $comment->getReport()
         );
 
         if ($comment->getId()) {
@@ -138,6 +127,11 @@ class CommentDAO extends DAO
             $id = $this->getDb()->lastInsertId();
             $comment->setId($id);
         }
+    }
+
+    // Delete all comments from an article
+    public function deleteAllByArticle($articleId) {
+        $this->getDb()->delete('comment', array('article_id' => $articleId));
     }
 
 

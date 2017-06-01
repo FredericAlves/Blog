@@ -7,9 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Blog\Domain\Article;
 use Blog\Domain\Comment;
 use Blog\Domain\User;
-//use Blog\Form\Type\ArticleType;
-//use Blog\Form\Type\CommentType;
-//use Blog\Form\Type\UserType;
+
 
 
 class AdminController
@@ -22,6 +20,9 @@ class AdminController
         $articles = $app['dao.article']->findAll();
         $comments = $app['dao.comment']->findAll();
         $users = $app['dao.user']->findAll();
+
+        //var_dump($comments);
+
         return $app['twig']->render('admin.html.twig', array(
             'articles' => $articles,
             'comments' => $comments,
@@ -60,9 +61,9 @@ class AdminController
     // Del an article
     public function deleteArticle($id, Application $app)
     {
-
+        $app['dao.comment']->deleteAllByArticle($id);
         $app['dao.article']->delete($id);
-        $app['session']->getFlashBag()->add('success', 'L\'article a été supprimé');
+        $app['session']->getFlashBag()->add('success', 'L\'article a été supprimé ainsi que tous les commentaires associés');
         // Redirection page d'accueil administration
         return $app->redirect($app['url_generator']->generate('admin'));
     }

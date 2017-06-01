@@ -66,6 +66,15 @@ class FrontController {
 
     }
 
+    // report a comment
+    public function reportAction(  $id,  Application $app)
+    {
+        $comment = $app['dao.comment']->find($id);
+        $app['dao.comment']->reportComment($comment);
+        $app['session']->getFlashBag()->add('success', 'Le commentaire a été signalé au modérateur.');
+        return $this->articleAction(($comment->getArticleId($id)),$app);
+    }
+
     // Login page
     public function loginAction(Request $request, Application $app) {
         return $app['twig']->render('login.html.twig', array(

@@ -12,9 +12,9 @@ class Comment
     private $id;
 
     /**
-     * Associated article.
+     * Associated id article.
      *
-     * @var \Blog\Domain\Article
+     * @var integer
      */
     private $article_id;
 
@@ -60,10 +60,33 @@ class Comment
     /**
      * Comment report.
      *
-     * @var integer
+     * @var boolean
      */
     private $report;
 
+    /**
+     * title of associed article
+     *
+     * @return string
+     */
+    private $article_title;
+
+    /**
+     * @return mixed
+     */
+    public function getArticle_Title()
+    {
+        return $this->article_title;
+    }
+
+    /**
+     * @param mixed $article_title
+     */
+    public function setArticleTitle($article_title)
+    {
+        $this->article_title = $article_title;
+        return $this;
+    }
 
 
     public function getId() {
@@ -110,12 +133,7 @@ class Comment
         $this->author = $author;
         return $this;
     }
-    /*
-    public function setAuthor(User $author) {
-        $this->author = $author;
-        return $this;
-    }
-    */
+
 
     public function getEmail() {
         return $this->email;

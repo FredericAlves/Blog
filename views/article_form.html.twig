@@ -13,20 +13,21 @@
     {% endfor %}
     <div class="well">
 
-    <form method="post" action="/admin/article/add">
+    <form method="post" action="/admin/article/add" onsubmit="return valider()" name="formSaisie">
 
         <div class="row">
 
             <div class="form-group">
                 <div class="col-sm-6">
                     <label for="title">Titre :</label>
-                    <input type="text" name="title" id=$title required>
+                    <input type="text" name="title" id=$title >
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="col-sm-12">
-                <textarea type="textarea" name="content" id=$content  required></textarea>
+                    <label for="content">contenu :</label>
+                <textarea type="textarea" name="content" id=$content  ></textarea>
 
                 </div>
             </div>
@@ -47,6 +48,32 @@
         tinymce.init({
             selector: 'textarea'
         });
+    </script>
+    <script type="text/javascript">
+        function valider() {
+
+            // if the field title is not empty
+            if (document.formSaisie.title.value && document.formSaisie.content.value) {
+                // it's ok, we can send the form
+                return true;
+            }
+            else {
+                // else we display a message
+                swal({
+                    title: "Veuillez Saisir un titre et un contenu à votre article",
+                    text: "",
+                    type: "warning",
+                    confirmButtonText: "Ok"
+                });
+                // and we can't send the form
+                return false;
+            }
+
+        }
+
+
+
+
     </script>
     {% endblock %}
 
