@@ -42,6 +42,13 @@ class User implements UserInterface
      */
     private $role;
 
+    /**
+     * Name.
+     * the full name of the user
+     *
+     * @var string
+     */
+
     private $name;
 
     public function getId() {
@@ -114,5 +121,20 @@ class User implements UserInterface
      */
     public function eraseCredentials() {
         // Nothing to do here
+    }
+
+    /**
+     * @return string
+     */
+    public function getName() {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }

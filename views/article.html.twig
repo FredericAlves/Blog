@@ -19,7 +19,7 @@
 
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <div class="input-field col s6">
-                            <input type="text" name="author" id=$author value="{{ app.user.username }}">
+                            <input type="text" name="author" id=$author value="{{ app.user.name }}">
                         </div>
                     {% else %}
                         <div class="input-field col s6">

@@ -42,14 +42,11 @@ $app->match('/admin/article/{id}/edit', "Blog\Controller\AdminController::editAr
 $app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticle")
     ->bind('admin_article_delete');
 
-// add a user
-$app->get('/admin/user/add', "Blog\Controller\AdminController::addUserAction")
-    ->bind('add_user');
-
 // edit an user
-$app->get('/admin/user/{id}/edit', "Blog\Controller\AdminController::editUserAction")
-    ->bind('edit_user');
+$app->get('/admin/user/{id}/edit',function () use ($app) {
+    return $app['twig']->render('user_form_edit.html.twig', array('title' => 'Modification compte utilisateur'));
+})->bind('edit_user');
 
-// delete an user
-$app->get('/admin/user/{id}/delete', "Blog\Controller\AdminController::delUserAction")
-    ->bind('delete_user');
+// save user
+$app->get('/admin/user/save', "Blog\Controller\AdminController::saveUserAction")
+    ->bind('save_user');

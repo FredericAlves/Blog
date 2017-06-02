@@ -30,5 +30,6 @@ CREATE TABLE user (
   password VARCHAR(88) NOT NULL ,
   salt VARCHAR(23) NOT NULL ,
   role VARCHAR(50) NOT NULL,
+  name VARCHAR(50) NOT NULL ,
   PRIMARY KEY (id)
   ) engine=innodb character set utf8 collate utf8_unicode_ci;

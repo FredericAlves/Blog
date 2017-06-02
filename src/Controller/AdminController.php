@@ -70,24 +70,20 @@ class AdminController
     }
 
 // Edit an user
-    public function editUserAction($id, Application $app) {
+    public function saveUserAction($id, Application $app) {
         $user = $app['dao.user']->find($id);
-
-        if ($userForm->isSubmitted() && $userForm->isValid()) {
-            $plainPassword = $user->getPassword();
-            // find the encoder for the user
-            $encoder = $app['security.encoder_factory']->getEncoder($user);
-            // compute the encoded password
-            $password = $encoder->encodePassword($plainPassword, $user->getSalt());
-            $user->setPassword($password);
-            $app['dao.user']->save($user);
-            $app['session']->getFlashBag()->add('success', 'L\'administrateur a été mis à jour');
-            return $app->redirect($app['url_generator']->generate('admin'));
+        $plainPassword = $user->getPassword();
+        // find the encoder for the user
+        $encoder = $app['security.encoder_factory']->getEncoder($user);
+        // compute the encoded password
+        $password = $encoder->encodePassword($plainPassword, $user->getSalt());
+        $user->setPassword($password);
+        $app['dao.user']->save($user);
+        $app['session']->getFlashBag()->add('success', 'Le compte utilisateur a été mis à jour');
+        return $app->redirect($app['url_generator']->generate('admin'));
         }
-        return $app['twig']->render('user_form_edit.html.twig', array(
-            'title' => 'Modification administrateur',
-            ));
-    }
+
+
 
 
 }
