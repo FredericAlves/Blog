@@ -11,16 +11,23 @@
 
     <button type="button" class="btn btn-primary" onclick="toggle_div(this,'id_du_div','Ajouter un commentaire','Annuler');">Ajouter un commentaire</button>
     <div id="id_du_div" style="display:none;">
-
+        <p></p>
             <form method="post" action="/article/{{ article.id }}/add_comment">
                 <input name="id" id=$id  type="hidden" value="{{ article.id }}">
                 {#<input name="commentId" id=$commentId type="hidden" value="">#}
                 <div class="row">
 
-                    <div class="input-field col s6">
-                        <input type="text" name="author" id=$author >
-                        <label for="author">Votre nom</label>
-                    </div>
+                    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <div class="input-field col s6">
+                            <input type="text" name="author" id=$author value="{{ app.user.username }}">
+                        </div>
+                    {% else %}
+                        <div class="input-field col s6">
+                            <input type="text" name="author" id=$author placeholder="Entrez votre nom">
+
+                        </div>
+                    {% endif %}
+                    <p></p>
                     <div class="input-field col s12">
                     <textarea type="textarea" name="content" id=$content placeholder="Entrez votre commentaire" required></textarea>
                     </div>

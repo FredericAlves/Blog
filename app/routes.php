@@ -38,7 +38,18 @@ $app->match('/admin/article/add', "Blog\Controller\AdminController::saveArticle"
 $app->match('/admin/article/{id}/edit', "Blog\Controller\AdminController::editArticle")
     ->bind('edit-article');
 
-// del an article
+// delete an article
 $app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticle")
     ->bind('admin_article_delete');
 
+// add a user
+$app->get('/admin/user/add', "Blog\Controller\AdminController::addUserAction")
+    ->bind('add_user');
+
+// edit an user
+$app->get('/admin/user/{id}/edit', "Blog\Controller\AdminController::editUserAction")
+    ->bind('edit_user');
+
+// delete an user
+$app->get('/admin/user/{id}/delete', "Blog\Controller\AdminController::delUserAction")
+    ->bind('delete_user');
