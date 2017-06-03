@@ -18,7 +18,7 @@ CREATE TABLE comment (
   date datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   author varchar(100) NOT NULL,
   content longtext NOT NULL,
-  report tinyint(1) NOT NULL DEFAULT '0',
+  report tinyint(1) DEFAULT '0',
   PRIMARY KEY (id),
   CONSTRAINT del_casc FOREIGN KEY (article_id) REFERENCES article(id) ON DELETE CASCADE,
   constraint fk_com_com foreign key(parent_id) references comment(id)

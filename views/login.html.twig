@@ -6,7 +6,7 @@
     <h2 class="text-center">{{ block('title') }}</h2>
     {% if error %}
         <div class="alert alert-danger">
-            <strong>Connexion échouée !</strong> {#{{ error }}#}
+            <strong>Connexion échouée !</strong> {{ error }}
         </div>
     {% endif %}
     <div class="well">

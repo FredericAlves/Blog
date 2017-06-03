@@ -6,7 +6,7 @@
                 Le {{ comment.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ comment.author }}</strong> a commenté :
             <p> {{ comment.content |  escape |  raw | nl2br}}</p>
 
-            <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': comment.id }) }}">Signaler le commentaire</a>
+            <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': comment.id }) }}" title="Signaler ce commentaire comme inopportun">Signaler le commentaire</a>
             <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ comment.id }}','Répondre','Annuler');">Répondre</button>
 
             <p></p>
