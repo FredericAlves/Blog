@@ -1,9 +1,10 @@
 <?php
 
+// -------------- Front ----------------
+
 // Home page
 $app->get('/',"Blog\Controller\FrontController::homeAction")
     ->bind('home');
-
 
 // Article details with comments
 $app->match('/article/{id}', "Blog\Controller\FrontController::articleAction")
@@ -21,9 +22,14 @@ $app->match('/comment/{id}/report', "Blog\Controller\FrontController::reportActi
 $app->get('/login', "Blog\Controller\FrontController::loginAction")
     ->bind('login');
 
+
+// ----------- Back Office ---------------
+
 // Admin home page
 $app->get('/admin', "Blog\Controller\AdminController::indexAction")
     ->bind('admin');
+
+// --- Article section
 
 // Page to add a new article
 $app->get('/admin/new_article/',function () use ($app) {
@@ -42,11 +48,30 @@ $app->match('/admin/article/{id}/edit', "Blog\Controller\AdminController::editAr
 $app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticle")
     ->bind('admin_article_delete');
 
-// edit an user
-$app->get('/admin/user/{id}/edit',function () use ($app) {
-    return $app['twig']->render('user_form_edit.html.twig', array('title' => 'Modification compte utilisateur'));
-})->bind('edit_user');
+// --- Comment section
 
-// save user
-$app->get('/admin/user/save', "Blog\Controller\AdminController::saveUserAction")
+// edit a comment
+$app->match('/admin/comment/{id}/edit', "Blog\Controller\AdminController::editCommentAction")
+    ->bind('edit-comment');
+
+// save a comment
+$app->match('/admin/comment/add', "Blog\Controller\AdminController::saveCommentAction")
+    ->bind('save-comment');
+
+// delete a comment
+$app->get('/admin/comment/{id}/delete', "Blog\Controller\AdminController::deleteCommentAction")
+    ->bind('admin_comment_delete');
+
+// Delete comment report
+$app->get('/admin/comment/{id}/report-off', "Blog\Controller\AdminController::reportCommentAction")
+    ->bind('admin_comment_report_off');
+
+// --- User section
+
+// edit an user
+$app->get('/admin/user/{id}/edit',"Blog\Controller\AdminController::editUserAction")
+    ->bind('edit_user');
+
+// save an user
+$app->get('/admin/user/{id}/save', "Blog\Controller\AdminController::saveUserAction")
     ->bind('save_user');

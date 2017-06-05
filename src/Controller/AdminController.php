@@ -69,7 +69,69 @@ class AdminController
         return $app->redirect($app['url_generator']->generate('admin'));
     }
 
+
+
+    public function editCommentAction($id, Application $app)
+    {
+        $comment = $app['dao.comment']->find($id);
+
+        return $app['twig']->render('comment_form_edit.html.twig', array('comment'=>$comment));
+
+
+    }
+
+    //update a comment
+    public function saveCommentAction(Application $app)
+    {
+        $comment=new comment();
+        if (isset($_POST['id']) and$_POST['id']!='') {
+            $comment->setId($_POST['id']);
+        }
+        $comment->setArticleId($_POST['article_id']);
+        $comment->setAuthor($_POST['author']);
+        $comment->setReport($_POST['report']);
+        $comment->setContent($_POST['content']);
+
+        $app['dao.comment']->save($comment);
+        $app['session']->getFlashBag()->add('success', 'Le commentaire a bien été publié.');
+
+
+        return $app->redirect($app['url_generator']->generate('admin'));
+
+
+    }
+
+    // Delete a comment
+    public function deleteCommentAction($id, Application $app)
+    {
+        $app['dao.comment']->delete($id);
+        $app['session']->getFlashBag()->add('success', 'Le commentaire a bien été supprimé');
+        // Redirection to admin home page
+        return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
+    // Delete comment report
+    public function reportCommentAction($id, Application $app)
+    {
+        $comment = $app['dao.comment']->find($id);
+        $app['dao.comment']->unreportComment($comment);
+        $app['session']->getFlashBag()->add('success', 'Le signalement a bien été supprimé.');
+        // Redirection to admin home page
+        return $app->redirect($app['url_generator']->generate('admin'));
+    }
+
 // Edit an user
+    public function editUserAction($id, Application $app)
+    {
+        $user = $app['dao.user']->find($id);
+
+        return $app['twig']->render('user_form_edit.html.twig', array('title' => 'Modification compte utilisateur','user'=>$user));
+
+
+    }
+
+
+// Save an user
     public function saveUserAction($id, Application $app) {
         $user = $app['dao.user']->find($id);
         $plainPassword = $user->getPassword();

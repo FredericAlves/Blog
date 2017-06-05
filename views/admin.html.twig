@@ -83,7 +83,6 @@
 
                         {% for comment in comments %}
                             <tr {% if comment.report == 1 %} class="danger"{% else %}class="active"{% endif %}>
-                                {#<td><a class="articleTitle" href="{{ path('article', { 'id': comment.article.id }) }}">{{ comment.article.title }}</a></td>#}
                                 <td>{{ comment.article_title }}</td>
                                 <td>{{ comment.author }}</td>
                                 <td>{{ comment.content | truncate(60) }}</td>
@@ -92,25 +91,23 @@
                                 <td>
 
 
-                                    <a href="" class="btn btn-info btn-xs" title="Modifier"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    {#<<a href="{{ path('admin_comment_edit', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Edit"><span class="glyphicon glyphicon-edit"></span></a>#}
+                                    <a href="{{ path('edit-comment', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Editer"><span class="glyphicon glyphicon-edit"></span></a>
                                     <button type="button" class="btn btn-danger btn-xs" title="Supprimer" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
                                     </button>
-                                    {% if comment.report == 1 %} <a href="" class="btn btn-warning btn-xs" title="Enlever le Signalement"><span class="glyphicon glyphicon-exclamation-sign"></span></a>{% endif %}
+                                    {% if comment.report == 1 %} <a href="{{ path('admin_comment_report_off', { 'id': comment.id }) }}" class="btn btn-success btn-xs" title="Enlever le Signalement"><span class="glyphicon glyphicon-ok-sign"></span></a>{% endif %}
                                     <div class="modal fade" id="commentDialog{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                                    <h4 class="modal-title" id="myModalLabel">Confirmation needed</h4>
+                                                    <h4 class="modal-title" id="myModalLabel">Confirmation nécessaire</h4>
                                                 </div>
                                                 <div class="modal-body">
-                                                    Do you really want to delete this comment ?
+                                                    Voulez-vous vraiment supprimer ce commentaire ?
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                                    <a href="" class="btn btn-danger">Confirm</a>
-                                                    {#<a href="{{ path('admin_comment_delete', { 'id': comment.id }) }}" class="btn btn-danger">Confirm</a>#}
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                                                    <a href="{{ path('admin_comment_delete', { 'id': comment.id }) }}" class="btn btn-danger">Confirmer</a>
                                                 </div>
                                             </div><!-- /.modal-content -->
                                         </div><!-- /.modal-dialog -->
@@ -164,3 +161,5 @@
         </div>
     </div>
 {% endblock %}
+
+

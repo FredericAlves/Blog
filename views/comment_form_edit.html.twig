@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Modifier un commentaire{% endblock %}
+
+{% block content %}
+    <div class="well">
+        <p></p>
+        <div class="row">
+            <div class="col-sm-offset-5 col-sm-4">
+                <a href="/admin#comments"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-menu-left"></span>Retour à la liste des commentaires</button></a>
+            </div>
+        </div>
+        <p></p>
+
+        <form action="/admin/comment/add" id="form-article" method="post">
+            <div class="row">
+                <input name="id" id=$id  type="hidden" value="{{ comment.id }}">
+                <input name="article_id" id=$article_id  type="hidden" value="{{ comment.articleid }}">
+                <input name="report" id=$report  type="hidden" value="{{ comment.report }}">
+                <div class="form-group">
+                    <div class="col-sm-6">
+                        <label for="author">Auteur</label>
+                        <input value ="{{ comment.author }}" type="text" name="author" id=$author class="validate" data-error="wrong" data-success="right" required/>
+                        <p></p>
+                    </div>
+                </div>
+
+
+
+                <div class="form-group">
+                    <div class="col-sm-12">
+                        <textarea id=$content name="content" rows="20" class="materialize-textarea wysiwyg">{{ comment.content }}</textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-4">
+                        <p></p>
+                        <input type="submit" class="btn btn-primary" value="Modifier le commentaire" formnovalidate="true"/>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    {% block javascript %}
+        {{ parent() }}
+
+    {% endblock %}
+{% endblock %}

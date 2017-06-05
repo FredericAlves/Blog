@@ -1,31 +1,43 @@
 {% extends 'layout.html.twig' %}
 
-{% block title %}Ajouter un article{% endblock %}
+{% block title %}Modifier un article{% endblock %}
 
 {% block content %}
-    <div class="demo-graphs mdl-shadow--2dp mdl-color--white mdl-cell mdl-cell--12-col">
-        <a href="/admin"><div id="return-update">Retour à la liste des articles</div></a>
+    <div class="well">
+        <p></p>
+    <div class="row">
+    <div class="col-sm-offset-5 col-sm-4">
+        <a href="/admin"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-menu-left"></span>Retour à la liste des articles</button></a>
+    </div>
+    </div>
+        <p></p>
 
         <form action="/admin/article/add" id="form-article" method="post">
             <div class="row">
                 <input name="id" id=$id  type="hidden" value="{{ article.id }}">
-                <div class="input-field col s12">
-                    <input value ="{{ article.title }}" type="text" name="title" id=$title class="validate" data-error="wrong" data-success="right" required/>
+                <div class="form-group">
+                    <div class="col-sm-6">
                     <label for="title">Titre</label>
+                    <input value ="{{ article.title }}" type="text" name="title" id=$title class="validate" data-error="wrong" data-success="right" required/>
+                        <p></p>
                 </div>
             </div>
 
 
-            <div class="row">
-                <div class="input-field col s12">
-                    <label for="content">Contenu</label>
+
+                <div class="form-group">
+                <div class="col-sm-12">
                     <textarea id=$content name="content" rows="20" class="materialize-textarea wysiwyg">{{ article.content }}</textarea>
                 </div>
             </div>
-            <div class="row">
-                <input type="submit" class="btn btn-primary" value="Modifier l'article" formnovalidate="true"/>
-            </div>
 
+                <div class="form-group">
+                    <div class="col-sm-offset-5 col-sm-4">
+                        <p></p>
+                <input type="submit" class="btn btn-primary" value="Modifier l'article" formnovalidate="true"/>
+                    </div>
+            </div>
+            </div>
         </form>
     </div>
     {% block javascript %}

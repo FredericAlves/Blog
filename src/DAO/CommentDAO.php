@@ -81,7 +81,14 @@ class CommentDAO extends DAO
     // report a comment
     public function reportComment($comment)
     {
-        $comment->setReport(true);
+        $comment->setReport('1');
+        $this->save($comment);
+    }
+
+    // Delete a comment report
+    public function unreportComment($comment)
+    {
+        $comment->setReport('0');
         $this->save($comment);
     }
 
@@ -133,6 +140,17 @@ class CommentDAO extends DAO
     public function deleteAllByArticle($articleId) {
         $this->getDb()->delete('comment', array('article_id' => $articleId));
     }
+
+    /**
+     * Removes a comment from the database.
+     *
+     * @param integer $id The comment id.
+     */
+    public function delete($id) {
+        // Delete the comment
+        $this->getDb()->delete('comment', array('id' => $id));
+    }
+
 
 
 }
