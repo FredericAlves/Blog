@@ -11,7 +11,7 @@ $app->match('/article/{id}', "Blog\Controller\FrontController::articleAction")
     ->bind('article');
 
 // add a comment
-$app->match('/article/{id}/add_comment', "Blog\Controller\FrontController::addComment")
+$app->match('/article/{id}/add_comment', "Blog\Controller\FrontController::addCommentAction")
     ->bind('add-comment');
 
 // Report a comment
@@ -37,7 +37,7 @@ $app->get('/admin/new_article/',function () use ($app) {
 })->bind('new-article');
 
 // save a new article
-$app->match('/admin/article/add', "Blog\Controller\AdminController::saveArticle")
+$app->match('/admin/article/add', "Blog\Controller\AdminController::saveArticleAction")
     ->bind('save-article');
 
 // edit an article

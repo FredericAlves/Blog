@@ -32,7 +32,7 @@ class AdminController
 
 
     //save  a new article or update an article
-    public function saveArticle(Application $app)
+    public function saveArticleAction(Application $app)
     {
         $article=new article();
         if (isset($_POST['id']) and$_POST['id']!='') {

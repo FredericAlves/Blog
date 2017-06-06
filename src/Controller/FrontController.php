@@ -46,7 +46,7 @@ class FrontController {
     }
 
     // add comment function
-    public function addComment($id, Application $app)
+    public function addCommentAction($id, Application $app)
     {
         $comment = new Comment();
         $comment->setArticleId($_POST['id']);
