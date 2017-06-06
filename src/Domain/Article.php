@@ -34,7 +34,7 @@ class Article
      */
     private $content;
 
-    private $image;
+
 
     public function getId() {
         return $this->id;
@@ -69,23 +69,6 @@ class Article
 
     public function setContent($content) {
         $this->content = $content;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getImage()
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param mixed $image
-     */
-    public function setImage($image)
-    {
-        $this->image = $image;
         return $this;
     }
 
