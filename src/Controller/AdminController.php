@@ -50,7 +50,7 @@ class AdminController
 
     }
 
-    public function editArticle($id, Application $app)
+    public function editArticleAction($id, Application $app)
     {
         $article = $app['dao.article']->find($id);
 
@@ -60,7 +60,7 @@ class AdminController
     }
 
     // Del an article
-    public function deleteArticle($id, Application $app)
+    public function deleteArticleAction($id, Application $app)
     {
         $app['dao.comment']->deleteAllByArticle($id);
         $app['dao.article']->delete($id);

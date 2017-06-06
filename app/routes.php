@@ -41,11 +41,11 @@ $app->match('/admin/article/add', "Blog\Controller\AdminController::saveArticle"
     ->bind('save-article');
 
 // edit an article
-$app->match('/admin/article/{id}/edit', "Blog\Controller\AdminController::editArticle")
+$app->match('/admin/article/{id}/edit', "Blog\Controller\AdminController::editArticleAction")
     ->bind('edit-article');
 
 // delete an article
-$app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticle")
+$app->get('/admin/article/{id}/delete', "Blog\Controller\AdminController::deleteArticleAction")
     ->bind('admin_article_delete');
 
 // --- Comment section
