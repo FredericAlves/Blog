@@ -132,9 +132,19 @@ class AdminController
 
 
 // Save an user
-    public function saveUserAction($id, Application $app) {
-        $user = $app['dao.user']->find($id);
-        $plainPassword = $user->getPassword();
+    public function saveUserAction(Application $app)
+    {
+
+        $user = new User();
+        if (isset($_POST['id']) and$_POST['id']!='') {
+            $user->setId($_POST['id']);
+        }
+        $user->setUsername($_POST['username']);
+        $user->setName($_POST['name']);
+        $user->setRole($_POST['role']);
+        $salt = substr(md5(time()), 0, 23);
+        $user->setSalt($salt);
+        $plainPassword = ($_POST['password']);
         // find the encoder for the user
         $encoder = $app['security.encoder_factory']->getEncoder($user);
         // compute the encoded password

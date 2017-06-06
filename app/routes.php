@@ -69,9 +69,9 @@ $app->get('/admin/comment/{id}/report-off', "Blog\Controller\AdminController::re
 // --- User section
 
 // edit an user
-$app->get('/admin/user/{id}/edit',"Blog\Controller\AdminController::editUserAction")
+$app->match('/admin/user/{id}/edit',"Blog\Controller\AdminController::editUserAction")
     ->bind('edit_user');
 
 // save an user
-$app->get('/admin/user/{id}/save', "Blog\Controller\AdminController::saveUserAction")
+$app->match('/admin/user/save', "Blog\Controller\AdminController::saveUserAction")
     ->bind('save_user');

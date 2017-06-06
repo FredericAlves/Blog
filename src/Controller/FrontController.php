@@ -59,6 +59,7 @@ class FrontController {
         } else {
             $comment->setAuthor("Anonyme");
         };
+        $comment->setReport('0');
         $app['dao.comment']->save($comment);
         $app['session']->getFlashBag()->add('success', 'Votre commentaire a bien été ajouté.');
 

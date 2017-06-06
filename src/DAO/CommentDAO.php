@@ -141,6 +141,7 @@ class CommentDAO extends DAO
         $this->getDb()->delete('comment', array('article_id' => $articleId));
     }
 
+
     /**
      * Removes a comment from the database.
      *

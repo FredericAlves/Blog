@@ -57,7 +57,7 @@
                 <p class="post-meta">
 
                     Le {{ children.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ children.author }}</strong> a répondu :<p> {{ children.content |  escape | nl2br}}</p>
-                <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': comment.id }) }}">Signaler le commentaire</a>
+                <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': children.id }) }}">Signaler le commentaire</a>
                 <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ children.id }}','Répondre','Annuler');">Répondre</button>
                 <p></p>
                 <div id="div_reponse.{{ children.id }}" style="display:none;">
@@ -102,7 +102,7 @@
                 <div class="panel-body">
                     <p class="post-meta">
                         Le {{ children2.date|date('d-m-Y \\à\\ H:i') }} <strong>{{ children2.author }}</strong> a répondu :<p> {{ children2.content |  escape | nl2br}}</p>
-                    <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': comment.id }) }}">Signaler le commentaire</a>
+                    <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': children2.id }) }}">Signaler le commentaire</a>
 
 
 
