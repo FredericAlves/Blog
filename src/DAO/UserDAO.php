@@ -46,8 +46,12 @@ class UserDAO extends DAO implements UserProviderInterface
     }
 
     /**
-     * {@inheritDoc}
-     */
+     * return an user matching the supplied username
+     *
+     * @param string $username The user username.
+     *
+     * @return \Blog\Domain\User|throws an exception if no matching user is found
+     **/
     public function loadUserByUsername($username)
     {
         $sql = "select * from user where username=?";

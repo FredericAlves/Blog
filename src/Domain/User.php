@@ -14,7 +14,7 @@ class User implements UserInterface
     private $id;
 
     /**
-     * User name.
+     * User log name.
      *
      * @var string
      */
@@ -51,76 +51,82 @@ class User implements UserInterface
 
     private $name;
 
+    /**
+     * @return int
+     */
     public function getId() {
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
     public function setId($id) {
         $this->id = $id;
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * @return string
      */
     public function getUsername() {
         return $this->username;
     }
 
+    /**
+     * @param string $username
+     */
     public function setUsername($username) {
         $this->username = $username;
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * @return string
      */
     public function getPassword() {
         return $this->password;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword($password) {
         $this->password = $password;
         return $this;
     }
 
     /**
-     * @inheritDoc
+     * @return string
      */
     public function getSalt()
     {
         return $this->salt;
     }
 
+    /**
+     * @param string $salt
+     */
     public function setSalt($salt)
     {
         $this->salt = $salt;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getRole()
     {
         return $this->role;
     }
 
+    /**
+     * @param string $role
+     */
     public function setRole($role) {
         $this->role = $role;
         return $this;
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function getRoles()
-    {
-        return array($this->getRole());
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function eraseCredentials() {
-        // Nothing to do here
     }
 
     /**
@@ -136,5 +142,20 @@ class User implements UserInterface
     public function setName($name)
     {
         $this->name = $name;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return array($this->getRole());
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials() {
+        // Nothing to do here
     }
 }

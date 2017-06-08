@@ -7,27 +7,27 @@ class Comment
     /**
      * Comment id.
      *
-     * @var integer
+     * @var int
      */
     private $id;
 
     /**
      * Associated id article.
      *
-     * @var integer
+     * @var int
      */
     private $article_id;
 
     /**
      * Associated comment.
      *
-     * @var \Blog\Domain\Comment
+     * @var int
      */
     private $parent_id;
 
 
     /**
-     * Comment date
+     * Comment add date
      *
      * @var \DateTime
      */
@@ -37,7 +37,7 @@ class Comment
     /**
      * Comment author.
      *
-     * @var
+     * @var string
      *
      */
     private $author;
@@ -65,14 +65,14 @@ class Comment
     private $report;
 
     /**
-     * title of associed article
+     * title of associated article
      *
      * @return string
      */
     private $article_title;
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getArticle_Title()
     {
@@ -80,7 +80,7 @@ class Comment
     }
 
     /**
-     * @param mixed $article_title
+     * @param string $article_title
      */
     public function setArticleTitle($article_title)
     {
@@ -88,75 +88,120 @@ class Comment
         return $this;
     }
 
-
+    /**
+     * @return int
+     */
     public function getId() {
         return $this->id;
     }
 
+    /**
+     * @param int $id
+     */
     public function setId($id) {
         $this->id = $id;
         return $this;
     }
-
+    /**
+     * @return int
+     */
     public function getArticleId() {
         return $this->article_id;
     }
 
+    /**
+     * @param int $article_id
+     */
     public function setArticleId($article_id) {
         $this->article_id = $article_id;
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getParentId() {
         return $this->parent_id;
     }
 
+    /**
+     * @param int $parent_id
+     */
     public function setParentId($parent_id) {
         $this->parent_id = $parent_id;
         return $this;
     }
 
+    /**
+     * @return /DateTime
+     */
     public function getDate() {
         return $this->date;
     }
 
+    /**
+     * @param /DateTime $date
+     */
     public function setDate($date) {
         $this->date = $date;
         return $this;
     }
 
+    /**
+     * @return string
+     */
      public function getAuthor() {
         return $this->author;
     }
 
+    /**
+     * @param string $author
+     */
     public function setAuthor($author) {
         $this->author = $author;
         return $this;
     }
 
-
+    /**
+     * @return  string
+     */
     public function getEmail() {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     */
     public function setEmail($email) {
         $this->email = $email;
         return $this;
     }
 
+    /**
+     * @return string
+     */
     public function getContent() {
         return $this->content;
     }
 
+    /**
+     * @param string $content
+     */
     public function setContent($content) {
         $this->content = $content;
         return $this;
     }
 
+    /**
+     * @return boolean
+     */
     public function getReport() {
         return $this->report;
     }
 
+    /**
+     * @param boolean $report
+     */
     public function setReport($report) {
         $this->report = $report;
         return $this;

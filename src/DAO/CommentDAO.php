@@ -7,7 +7,13 @@ use Blog\Domain\Comment;
 class CommentDAO extends DAO
 {
 
-
+    /**
+     * Returns a comment matching the supplied id.
+     *
+     * @param integer $id The comment id.
+     *
+     * @return \Blog\Domain\Comment|throws an exception if no matching comment is found
+     */
     public function find($id)
     {
         $sql = "select * from comment where id=?";
@@ -37,18 +43,13 @@ class CommentDAO extends DAO
     }
 
     /**
-     * Return a list of all comments for an article, sorted by date (most recent last).
+     * Return a list of all comments for an article, sorted by date (most recent first).
      *
      * @param integer $articleId The article id.
      *
      * @return array A list of all comments for the article.
      */
     public function findAllByArticle($articleId) {
-        // The associated article is retrieved only once
-        //$article = $this->articleDAO->find($articleId);
-
-        // id is not selected by the SQL query
-        // The article won't be retrieved during domain objet construction
         $sql = "select * from comment where article_id=?  and parent_id is NULL order by id DESC ";
         $result = $this->getDb()->fetchAll($sql, array($articleId));
 
@@ -57,18 +58,24 @@ class CommentDAO extends DAO
         foreach ($result as $row) {
             $comId = $row['id'];
             $comment = $this->buildDomainObject($row);
-            // The associated article is defined for the constructed comment
-            //$comment->setArticleId($article);
             $comments[$comId] = $comment;
         }
         return $comments;
     }
 
+    /**
+     * Return a list of all childrens comment for the comment, sorted by date (most recent first).
+     *
+     * @param integer $comment The comment id.
+     *
+     * @return array A list of all childrens comment for the comment.
+     */
     public function findAllChildren($comment) {
         $sql = "select * from comment where parent_id=?  order by id DESC";
         $result = $this->getDb()->fetchAll($sql, array($comment->getId()));
         // Convert query result to an array of domain objects
         $childrenComments = array();
+
         foreach ($result as $row) {
             $comId = $row['id'];
             $childrenComment = $this->buildDomainObject($row);
