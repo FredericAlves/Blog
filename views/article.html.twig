@@ -3,6 +3,12 @@
 {% block title %}{{ article.title }}{% endblock %}
 
 {% block content %}
+    <p></p>
+    <div class="row">
+        <div class="col-sm-offset-5 col-sm-4">
+            <a href="/"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-menu-left"></span>Retour à la liste des billets</button></a>
+        </div>
+    </div>
     <p>
     <h2>{{ article.title }}</h2>
     <div class="article">

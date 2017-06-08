@@ -39,8 +39,8 @@
                                 <td><a class="articleTitle" href="{{ path('edit-article', { 'id': article.id }) }}" title="Modifier">{{ article.title }}</a></td>
                                 <td>{{ article.content | truncate(60) | striptags | raw}}</td>
                                 <td>
-                                    <a href="{{ path('edit-article', { 'id': article.id }) }}" class="btn btn-info btn-xs" title="Modifier"><span class="glyphicon glyphicon-pencil"></span></a>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Supprimer" data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span class="glyphicon glyphicon-remove"></span>
+                                    <a href="{{ path('edit-article', { 'id': article.id }) }}" class="btn btn-info btn-xs" title="Modifier le billet"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Supprimer le billet" data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                     <div class="modal fade" id="articleDialog{{ article.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                                         <div class="modal-dialog">
@@ -93,8 +93,8 @@
                                 <td>
 
 
-                                    <a href="{{ path('edit-comment', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Editer"><span class="glyphicon glyphicon-edit"></span></a>
-                                    <button type="button" class="btn btn-danger btn-xs" title="Supprimer" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
+                                    <a href="{{ path('edit-comment', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Editer le commentaire"><span class="glyphicon glyphicon-edit"></span></a>
+                                    <button type="button" class="btn btn-danger btn-xs" title="Supprimer le commentaire" data-toggle="modal" data-target="#commentDialog{{ comment.id }}"><span class="glyphicon glyphicon-remove"></span>
                                     </button>
                                     {% if comment.report == 1 %} <a href="{{ path('admin_comment_report_off', { 'id': comment.id }) }}" class="btn btn-success btn-xs" title="Enlever le Signalement"><span class="glyphicon glyphicon-ok-sign"></span></a>{% endif %}
                                     <div class="modal fade" id="commentDialog{{ comment.id }}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

@@ -8,10 +8,10 @@ INSERT INTO `comment` (`id`, `article_id`, `parent_id`, `date`, `author`, `conte
   (4, 1, NULL, '2017-05-30 15:41:26', 'Fred', 'Wouaa super billet !', 0),
   (7, 1, 5, '2017-05-30 15:44:29', 'Titi ', 'Ouaiii t\'as raison !', 0);
 
-/* raw password is 'john' */
+
 insert into user values
   (1, 'jean', '$2y$13$F9v8pl5u5WMrCorP9MLyJeyIsOLj.0/xqKd/hqa5440kyeB7FQ8te', 'YcM=A$nsYzkyeDVjEUa7W9K', 'ROLE_USER', 'Jean Forteroche');
 
-/* raw password is '@dm1n' */
+
 insert into user values
   (3, 'admin', '$2y$13$A8MQM2ZNOi99EW.ML7srhOJsCaybSbexAj/0yXrJs4gQ/2BqMMW2K', 'EDDsl&fBCJB|a5XUtAlnQN8', 'ROLE_ADMIN', 'Admin du site');
