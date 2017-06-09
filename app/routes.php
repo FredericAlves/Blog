@@ -29,6 +29,7 @@ $app->get('/login', "Blog\Controller\FrontController::loginAction")
 $app->get('/admin', "Blog\Controller\AdminController::indexAction")
     ->bind('admin');
 
+
 // --- Article section
 
 // Page to add a new article

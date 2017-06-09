@@ -104,10 +104,12 @@ class AdminController
     // Delete a comment
     public function deleteCommentAction($id, Application $app)
     {
-        $app['dao.comment']->delete($id);
+        $app['dao.comment']->deleteComment($id);
         $app['session']->getFlashBag()->add('success', 'Le commentaire a bien été supprimé');
-        // Redirection to admin home page
-        return $app->redirect($app['url_generator']->generate('admin'));
+        // Redirection to admin home page , tab comments
+        // return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect('/admin#comments');
+
     }
 
     // Delete comment report
@@ -116,8 +118,9 @@ class AdminController
         $comment = $app['dao.comment']->find($id);
         $app['dao.comment']->unreportComment($comment);
         $app['session']->getFlashBag()->add('success', 'Le signalement a bien été supprimé.');
-        // Redirection to admin home page
-        return $app->redirect($app['url_generator']->generate('admin'));
+        // Redirection to admin home page, tab comments
+        //return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect('/admin#comments');
     }
 
 // Edit an user

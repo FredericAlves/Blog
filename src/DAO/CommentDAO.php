@@ -85,14 +85,26 @@ class CommentDAO extends DAO
         return $childrenComments;
     }
 
-    // report a comment
+    /**
+     * Report a comment
+     *
+     * @param integer $comment the comment id
+     *
+     * save the comment updated
+     */
     public function reportComment($comment)
     {
         $comment->setReport('1');
         $this->save($comment);
     }
 
-    // Delete a comment report
+    /**
+     * Delete a comment report
+     *
+     * @param integer $comment the comment id
+     *
+     * save the comment updated
+     */
     public function unreportComment($comment)
     {
         $comment->setReport('0');
@@ -103,6 +115,7 @@ class CommentDAO extends DAO
      * Creates an Comment object based on a DB row.
      *
      * @param array $row The DB row containing Comment data.
+     *
      * @return \Blog\Domain\Comment
      */
     protected function buildDomainObject(array $row) {
@@ -120,6 +133,13 @@ class CommentDAO extends DAO
 
         return $comment;
     }
+
+    /**
+     * Save an Comment object into DB.
+     *
+     * @param object $comment containing Comment data.
+     *
+     */
 
     public function save(Comment $comment)
     {
@@ -143,7 +163,12 @@ class CommentDAO extends DAO
         }
     }
 
-    // Delete all comments from an article
+    /**
+     * Delete all comments from an article
+     *
+     * @param integer $articleId the id of the article
+     *
+     */
     public function deleteAllByArticle($articleId) {
         $this->getDb()->delete('comment', array('article_id' => $articleId));
     }
@@ -154,7 +179,7 @@ class CommentDAO extends DAO
      *
      * @param integer $id The comment id.
      */
-    public function delete($id) {
+    public function deleteComment($id) {
         // Delete the comment
         $this->getDb()->delete('comment', array('id' => $id));
     }
