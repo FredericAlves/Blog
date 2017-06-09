@@ -33,9 +33,8 @@ $app->get('/admin', "Blog\Controller\AdminController::indexAction")
 // --- Article section
 
 // Page to add a new article
-$app->get('/admin/new_article/',function () use ($app) {
-    return $app['twig']->render('article_form.html.twig', array('title' => 'Nouveau billet'));
-})->bind('new-article');
+$app->get('/admin/new_article/', "Blog\Controller\AdminController::newArticleAction")
+->bind('new-article');
 
 // save a new article
 $app->match('/admin/article/add', "Blog\Controller\AdminController::saveArticleAction")

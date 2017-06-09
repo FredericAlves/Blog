@@ -20,7 +20,7 @@
     <h3>Commentaires</h3>
 
     <button type="button" class="btn btn-primary" onclick="toggle_div(this,'id_du_div','Ajouter un commentaire','Annuler');">Ajouter un commentaire</button>
-    <div id="id_du_div" style="display:none;">
+    <div id="id_du_div" style="display:none; padding-left: 15px;">
         <p></p>
             <form method="post" action="/article/{{ article.id }}/add_comment">
                 <input name="id" id=$id  type="hidden" value="{{ article.id }}">

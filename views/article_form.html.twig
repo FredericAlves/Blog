@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <div class="col-sm-12">
-                <textarea type="textarea" name="content" id=$content  ></textarea>
+                <textarea type="textarea" name="content" id=$content ></textarea>
 
                 </div>
             </div>
@@ -71,22 +71,23 @@
     </script>
     <script type="text/javascript">
         function valider() {
-
-            // if the field title is not empty
-            if (document.formSaisie.title.value && document.formSaisie.content.value) {
-                // it's ok, we can send the form
-                return true;
-            }
-            else {
-                // else we display a message
+            // if the field title or content is empty
+            if(!document.formSaisie.title.value || !tinyMCE.get('$content').getContent()){
+                // we display a message
                 swal({
                     title: "Veuillez Saisir un titre et un contenu à votre article",
                     text: "",
                     type: "warning",
                     confirmButtonText: "Ok"
                 });
-                // and we can't send the form
                 return false;
+
+            }
+            else {
+                // it's ok, we can send the form
+                return true;
+
+
             }
 
         }

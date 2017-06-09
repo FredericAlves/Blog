@@ -55,7 +55,6 @@ $app['dao.article'] = function ($app) {
 };
 $app['dao.comment'] = function ($app) {
     $commentDAO = new Blog\DAO\CommentDAO($app['db']);
-    //$commentDAO->setArticleDAO($app['dao.article']);
     return $commentDAO;
 };
 $app['dao.user'] = function ($app) {

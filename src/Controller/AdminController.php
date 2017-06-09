@@ -30,8 +30,13 @@ class AdminController
         ));
     }
 
+    // page to edit a new article
+    public function newArticleAction(Application $app)
+    {
+        return $app['twig']->render('article_form.html.twig', array('title' => 'Nouveau billet'));
+    }
 
-    //save  a new article or update an article
+    //save a new article or update an article
     public function saveArticleAction(Application $app)
     {
         $article=new article();
@@ -44,8 +49,7 @@ class AdminController
         $app['dao.article']->save($article);
         $app['session']->getFlashBag()->add('success', 'Votre billet a bien été publié.');
 
-
-        return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect('/admin');
 
 
     }
@@ -59,14 +63,14 @@ class AdminController
 
     }
 
-    // Del an article
+    // Delete an article
     public function deleteArticleAction($id, Application $app)
     {
         $app['dao.comment']->deleteAllByArticle($id);
         $app['dao.article']->delete($id);
         $app['session']->getFlashBag()->add('success', 'L\'article a été supprimé ainsi que tous les commentaires associés');
         // Redirection page d'accueil administration
-        return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect('/admin');
     }
 
 
@@ -96,7 +100,7 @@ class AdminController
         $app['session']->getFlashBag()->add('success', 'Le commentaire a bien été publié.');
 
 
-        return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect('/admin#comments');
 
 
     }
@@ -154,8 +158,7 @@ class AdminController
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password);
         $app['dao.user']->save($user);
-        $app['session']->getFlashBag()->add('success', 'Le compte utilisateur a été mis à jour');
-        return $app->redirect($app['url_generator']->generate('admin'));
+        return $app->redirect('/admin#users');
         }
 
 

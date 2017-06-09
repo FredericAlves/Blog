@@ -10,7 +10,7 @@
             <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ comment.id }}','Répondre','Annuler');">Répondre</button>
 
             <p></p>
-            <div id="div_reponse.{{ comment.id }}" style="display:none;">
+            <div id="div_reponse.{{ comment.id }}" style="display:none; padding-left: 10px;">
 
                 <form method="post" action="/article/{{ article.id }}/add_comment">
 
@@ -60,7 +60,7 @@
                 <a class="btn btn-warning pull-right" href="{{ path('report_comment', { 'id': children.id }) }}">Signaler le commentaire</a>
                 <button type="button" class="btn btn-primary" onclick="toggle_div(this,'div_reponse.{{ children.id }}','Répondre','Annuler');">Répondre</button>
                 <p></p>
-                <div id="div_reponse.{{ children.id }}" style="display:none;">
+                <div id="div_reponse.{{ children.id }}" style="display:none; padding-left: 10px;">
 
 
 
