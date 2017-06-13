@@ -24,6 +24,8 @@ class FrontController {
       $comments = $app['dao.comment']->findAllByArticle($id);
       $childrenComments = [];
       $childrenCommentsLevel2 = [];
+      $childrenCommentsLevel3 = [];
+
 
         foreach ($comments as $comment) {
 
@@ -34,6 +36,12 @@ class FrontController {
 
                 $childrenCommentsLevel2[$children->getId()]= $app['dao.comment']->findAllChildren($children);
 
+
+                foreach ($childrenCommentsLevel2[$children->getId()] as $children2){
+
+                    $childrenCommentsLevel3[$children2->getId()]= $app['dao.comment']->findAllChildren($children2);
+
+                }
             };
         };
 
@@ -42,6 +50,7 @@ class FrontController {
             'comments' => $comments,
             'childrenComments' => $childrenComments,
             'childrenCommentsLevel2' => $childrenCommentsLevel2,
+            'childrenCommentsLevel3' => $childrenCommentsLevel3,
         ));
     }
 

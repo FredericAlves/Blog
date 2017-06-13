@@ -1,5 +1,6 @@
 body {
     padding-top: 50px;
+
 }
 
 .article {
@@ -77,6 +78,3 @@ textarea        {
     padding-left: 50px;
 }
 
-[required]{
-    border: 2px solid red;
-}

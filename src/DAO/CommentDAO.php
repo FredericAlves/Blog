@@ -82,6 +82,7 @@ class CommentDAO extends DAO
 
             $childrenComments[$comId] = $childrenComment;
         }
+
         return $childrenComments;
     }
 

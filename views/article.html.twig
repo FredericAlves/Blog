@@ -9,10 +9,16 @@
             <a href="/"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-menu-left"></span>Retour à la liste des billets</button></a>
         </div>
     </div>
-    <p>
+    <p></p>
+    {% for flashMessage in app.session.flashbag.get('success') %}
+        <div class="alert alert-success">
+            {{ flashMessage }}
+        </div>
+    {% endfor %}
+
     <h2>{{ article.title }}</h2>
     <div class="article">
-    <p>{{ article.content | raw }}</p>
+        <p>{{ article.content | raw }}</p>
     </div>
     <p></p>
     <p class="pull-right">Publié le {{ article.date|date('d-m-Y')}} par Jean Forteroche</p>
@@ -47,11 +53,7 @@
 
         </div>
 
-    {% for flashMessage in app.session.flashbag.get('success') %}
-        <div class="alert alert-success">
-            {{ flashMessage }}
-        </div>
-    {% endfor %}
+
     <p></p>
     {% if comments %}
         {% for comment in comments %}
