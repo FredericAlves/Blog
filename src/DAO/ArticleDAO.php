@@ -1,4 +1,7 @@
 <?php
+/**
+ * Frédéric - Projet 3 - Formation OpenClassrooms - 14/06/17 19:11
+ */
 
 namespace Blog\DAO;
 

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Frédéric - Projet 3 - Formation OpenClassrooms - 14/06/17 19:09
+ */
 
 namespace Blog\DAO;
 
@@ -14,8 +17,8 @@ class UserDAO extends DAO implements UserProviderInterface
      * Returns a user matching the supplied id.
      *
      * @param integer $id The user id.
-     *
-     * @return \Blog\Domain\User|throws an exception if no matching user is found
+     * @return throws|User an exception if no matching user is found
+     * @throws \Exception
      */
     public function find($id) {
         $sql = "select * from user where id=?";

@@ -1,4 +1,7 @@
 <?php
+/**
+ * Frédéric - Projet 3 - Formation OpenClassrooms - 14/06/17 19:10
+ */
 
 namespace Blog\DAO;
 
@@ -11,8 +14,8 @@ class CommentDAO extends DAO
      * Returns a comment matching the supplied id.
      *
      * @param integer $id The comment id.
-     *
-     * @return \Blog\Domain\Comment|throws an exception if no matching comment is found
+     * @return throws|Comment an exception if no matching comment is found
+     * @throws \Exception
      */
     public function find($id)
     {
@@ -138,8 +141,7 @@ class CommentDAO extends DAO
     /**
      * Save an Comment object into DB.
      *
-     * @param object $comment containing Comment data.
-     *
+     * @param Comment|object $comment containing Comment data.
      */
 
     public function save(Comment $comment)

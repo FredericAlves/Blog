@@ -1,4 +1,7 @@
 <?php
+/**
+ * Frédéric - Projet 3 - Formation OpenClassrooms - 14/06/17 19:09
+ */
 
 namespace Blog\Domain;
 
@@ -81,6 +84,7 @@ class Comment
 
     /**
      * @param string $article_title
+     * @return $this
      */
     public function setArticleTitle($article_title)
     {
@@ -97,6 +101,7 @@ class Comment
 
     /**
      * @param int $id
+     * @return $this
      */
     public function setId($id) {
         $this->id = $id;
@@ -111,6 +116,7 @@ class Comment
 
     /**
      * @param int $article_id
+     * @return $this
      */
     public function setArticleId($article_id) {
         $this->article_id = $article_id;
@@ -126,6 +132,7 @@ class Comment
 
     /**
      * @param int $parent_id
+     * @return $this
      */
     public function setParentId($parent_id) {
         $this->parent_id = $parent_id;
@@ -133,7 +140,7 @@ class Comment
     }
 
     /**
-     * @return /DateTime
+     * @return \DateTime /DateTime
      */
     public function getDate() {
         return $this->date;
@@ -141,6 +148,7 @@ class Comment
 
     /**
      * @param /DateTime $date
+     * @return $this
      */
     public function setDate($date) {
         $this->date = $date;
@@ -156,6 +164,7 @@ class Comment
 
     /**
      * @param string $author
+     * @return $this
      */
     public function setAuthor($author) {
         $this->author = $author;
@@ -171,6 +180,7 @@ class Comment
 
     /**
      * @param string $email
+     * @return $this
      */
     public function setEmail($email) {
         $this->email = $email;
@@ -186,6 +196,7 @@ class Comment
 
     /**
      * @param string $content
+     * @return $this
      */
     public function setContent($content) {
         $this->content = $content;
@@ -201,6 +212,7 @@ class Comment
 
     /**
      * @param boolean $report
+     * @return $this
      */
     public function setReport($report) {
         $this->report = $report;

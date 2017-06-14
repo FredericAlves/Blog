@@ -1,4 +1,7 @@
 <?php
+/**
+ * Frédéric - Projet 3 - Formation OpenClassrooms - 14/06/17 19:09
+ */
 
 namespace Blog\Domain;
 
@@ -60,6 +63,7 @@ class User implements UserInterface
 
     /**
      * @param int $id
+     * @return $this
      */
     public function setId($id) {
         $this->id = $id;
@@ -75,6 +79,7 @@ class User implements UserInterface
 
     /**
      * @param string $username
+     * @return $this
      */
     public function setUsername($username) {
         $this->username = $username;
@@ -90,6 +95,7 @@ class User implements UserInterface
 
     /**
      * @param string $password
+     * @return $this
      */
     public function setPassword($password) {
         $this->password = $password;
@@ -106,6 +112,7 @@ class User implements UserInterface
 
     /**
      * @param string $salt
+     * @return $this
      */
     public function setSalt($salt)
     {
@@ -123,6 +130,7 @@ class User implements UserInterface
 
     /**
      * @param string $role
+     * @return $this
      */
     public function setRole($role) {
         $this->role = $role;

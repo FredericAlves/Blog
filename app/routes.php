@@ -1,4 +1,11 @@
 <?php
+/**
+ * Frédéric - Projet 3 - Formation OpenClassrooms - 14/06/17 18:49
+ *
+ * Router of the application
+ */
+
+
 
 // -------------- Front ----------------
 
