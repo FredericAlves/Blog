@@ -1,4 +1,5 @@
 {% extends "layout.html.twig" %}
+
 {% set adminMenu = true %}
 
 {% block title %}Administration{% endblock %}
@@ -23,22 +24,25 @@
 
     <div class="tab-content">
         <div class="tab-pane fade in active adminTable" id="articles">
+            <div class="bouton">
             <a href="{{ path('new-article') }}"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Ajouter un billet</button></a>
+            </div>
+            <p></p>
             {% if articles %}
                 <div class="table-responsive">
                     <table class="table table-hover table-condensed">
                         <thead>
                         <tr>
-                            <th>Titre</th>
-                            <th>Contenu</th>
-                            <th></th>  <!-- Actions column -->
+                            <th class="specificth">Titre</th>
+                            <th class="specificth">Contenu</th>
+                            <th class="specificth">Action</th>  <!-- Actions column -->
                         </tr>
                         </thead>
                         {% for article in articles %}
                             <tr>
-                                <td><a class="articleTitle" href="{{ path('edit-article', { 'id': article.id }) }}" title="Modifier">{{ article.title }}</a></td>
-                                <td>{{ article.content | truncate(60) | striptags | raw}}</td>
-                                <td>
+                                <td class="specifictd"><a class="articleTitle" href="{{ path('edit-article', { 'id': article.id }) }}" title="Modifier">{{ article.title }}</a></td>
+                                <td class="specifictd">{{ article.content | truncate(60) | striptags | raw}}</td>
+                                <td class="specifictd">
                                     <a href="{{ path('edit-article', { 'id': article.id }) }}" class="btn btn-info btn-xs" title="Modifier le billet"><span class="glyphicon glyphicon-pencil"></span></a>
                                     <button type="button" class="btn btn-danger btn-xs" title="Supprimer le billet" data-toggle="modal" data-target="#articleDialog{{ article.id }}"><span class="glyphicon glyphicon-remove"></span>
                                     </button>
@@ -75,22 +79,22 @@
                     <table class="table table-hover table-condensed">
                         <thead>
                         <tr>
-                            <th>Billet</th>
-                            <th>Auteur</th>
-                            <th>Contenu</th>
-                            <th>Signalement</th>
-                            <th>Action</th>  <!-- Actions column -->
+                            <th class="specificth">Billet</th>
+                            <th class="specificth">Auteur</th>
+                            <th class="specificth">Contenu</th>
+                            <th class="specificth">Signalement</th>
+                            <th class="specificth">Action</th>  <!-- Actions column -->
                         </tr>
                         </thead>
 
                         {% for comment in comments %}
                             <tr {% if comment.report == 1 %} class="danger"{% else %}class="active"{% endif %}>
-                                <td>{{ comment.article_title }}</td>
-                                <td>{{ comment.author }}</td>
-                                <td>{{ comment.content | truncate(60) }}</td>
-                                <td>{% if comment.report == 1 %} Commentaire signalé comme inopportun{% endif %}</td>
+                                <td class="specifictd">{{ comment.article_title }}</td>
+                                <td class="specifictd">{{ comment.author }}</td>
+                                <td class="specifictd">{{ comment.content | truncate(60) }}</td>
+                                <td class="specifictd">{% if comment.report == 1 %} Commentaire signalé comme inopportun{% endif %}</td>
 
-                                <td>
+                                <td class="specifictd">
 
 
                                     <a href="{{ path('edit-comment', { 'id': comment.id }) }}" class="btn btn-info btn-xs" title="Editer le commentaire"><span class="glyphicon glyphicon-edit"></span></a>
@@ -130,24 +134,24 @@
                     <table class="table table-hover table-condensed">
                         <thead>
                         <tr>
-                            <th>Nom d'utilisateur</th>
-                            <th>Nom complet</th>
-                            <th>Role</th>
-                            <th></th>  <!-- Actions column -->
+                            <th class="specificth">Nom d'utilisateur</th>
+                            <th class="specificth">Nom complet</th>
+                            <th class="specificth">Role</th>
+                            <th class="specificth">Action</th>  <!-- Actions column -->
                         </tr>
                         </thead>
                         {% for user in users %}
                             <tr>
-                                <td><a href="{{ path('edit_user', { 'id': user.id }) }}">{{ user.username }}</a></td>
-                                <td>{{ user.name }}</td>
-                                <td>
+                                <td class="specifictd"><a href="{{ path('edit_user', { 'id': user.id }) }}">{{ user.username }}</a></td>
+                                <td class="specifictd">{{ user.name }}</td>
+                                <td class="specifictd">
                                     {% if user.role == 'ROLE_ADMIN' %}
                                         Admin
                                     {% else %}
                                         User
                                     {% endif %}
                                 </td>
-                                <td>
+                                <td class="specifictd">
                                     <a href="{{ path('edit_user', { 'id': user.id }) }}" class="btn btn-info btn-xs" title="Editer l'utilisateur"><span class="glyphicon glyphicon-edit"></span></a>
 
                                 </td>

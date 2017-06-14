@@ -141,23 +141,26 @@ class AdminController
 
     }
 
-    // Delete comment report
-    public function reportCommentAction($id, Application $app)
+    // delete comment report
+    public function deleteReportCommentAction($id, Application $app)
     {
         // we find the comment with his id
         $comment = $app['dao.comment']->find($id);
+        // we delete the report
         $app['dao.comment']->unreportComment($comment);
         $app['session']->getFlashBag()->add('success', 'Le signalement a bien été supprimé.');
+
         // Redirection to admin home page, tab comments
-        //return $app->redirect($app['url_generator']->generate('admin'));
         return $app->redirect('/admin#comments');
     }
 
 // Edit an user
     public function editUserAction($id, Application $app)
     {
+        // we find the user with his id
         $user = $app['dao.user']->find($id);
 
+        // we make the page with the data
         return $app['twig']->render('user_form_edit.html.twig', array('title' => 'Modification compte utilisateur','user'=>$user));
 
 
@@ -167,11 +170,15 @@ class AdminController
 // Save an user
     public function saveUserAction(Application $app)
     {
-
+        // new user object
         $user = new User();
+
+        // If the id exists, we write it
         if (isset($_POST['id']) and$_POST['id']!='') {
             $user->setId($_POST['id']);
         }
+
+        // Attribute assignment
         $user->setUsername($_POST['username']);
         $user->setName($_POST['name']);
         $user->setRole($_POST['role']);
@@ -183,7 +190,11 @@ class AdminController
         // compute the encoded password
         $password = $encoder->encodePassword($plainPassword, $user->getSalt());
         $user->setPassword($password);
+
+        // save the user
         $app['dao.user']->save($user);
+
+        // Redirection to admin home page, tab users
         return $app->redirect('/admin#users');
         }
 

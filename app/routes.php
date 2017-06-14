@@ -70,7 +70,7 @@ $app->get('/admin/comment/{id}/delete', "Blog\Controller\AdminController::delete
     ->bind('admin_comment_delete');
 
 // Delete comment report
-$app->get('/admin/comment/{id}/report-off', "Blog\Controller\AdminController::reportCommentAction")
+$app->get('/admin/comment/{id}/report-off', "Blog\Controller\AdminController::deleteReportCommentAction")
     ->bind('admin_comment_report_off');
 
 // --- User section

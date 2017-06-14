@@ -4,8 +4,17 @@
 
 {% block title %}{{ title }}{% endblock %}
 
+
+
 {% block content %}
+
     <h2 class="text-center">{{ block('title') }}</h2>
+    <div class="form-group">
+        <div class="text-center">
+            <p></p>
+            <a href="/admin"><button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-menu-left"></span>Retour à la liste des billets</button></a>
+        </div>
+    </div>
     {% for flashMessage in app.session.flashbag.get('success') %}
         <div class="alert alert-success">
             {{ flashMessage }}
@@ -20,6 +29,7 @@
             <div class="form-group">
                 <div class="col-sm-6">
                     <label for="title">Titre :</label>
+
                     <input type="text" name="title" id=$title >
                     <p></p>
                 </div>
@@ -34,9 +44,9 @@
             </div>
 
             <div class="form-group">
-                <div class="col-sm-offset-5 col-sm-4">
+                <div class="text-center">
                     <p></p>
-                    <input type="submit" class="btn btn-primary" value="Publier l'article" formnovalidate="true"/>
+                    <input type="submit" class="btn btn-primary" value="Publier le billet" formnovalidate="true"/>
                 </div>
             </div>
         </div>
