@@ -52,7 +52,7 @@ class AdminController
             $article->setId($_POST['id']);
         }
         $article->setTitle($_POST['title']);
-        $article->setContent($_POST['content']);
+        $article->setContent($_POST['$content']);
 
         // save the article
         $app['dao.article']->save($article);

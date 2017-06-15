@@ -29,21 +29,18 @@
 
                 <div class="form-group">
                     <div class="col-sm-12">
-                        <textarea id=$content name="content"  class="materialize-textarea wysiwyg">{{ comment.content }}</textarea>
+                        <textarea id=$content name="content"  class="materialize-textarea wysiwyg" required>{{ comment.content }} </textarea>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="text-center">
                         <p></p>
-                        <input type="submit" class="btn btn-primary" value="Modifier le commentaire" formnovalidate="true"/>
+                        <input type="submit" class="btn btn-primary" value="Modifier le commentaire" />
                     </div>
                 </div>
             </div>
         </form>
     </div>
-    {% block javascript %}
-        {{ parent() }}
 
-    {% endblock %}
 {% endblock %}

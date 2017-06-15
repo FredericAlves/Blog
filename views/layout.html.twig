@@ -21,10 +21,13 @@
                 <a class="navbar-brand" href="{{ path('home') }}">Billet simple pour l'Alaska</a>
             </div>
             <div class="collapse navbar-collapse" id="navbar-collapse-target">
+
                 <ul class="nav navbar-nav navbar-right">
+
                     {% if app.user and is_granted('ROLE_ADMIN') %}
                         <li class="{% if adminMenu is defined %}active{% endif %}"><a href="{{ path('admin') }}"><span class="glyphicon glyphicon-cog"></span> Administration</a></li>
                     {% endif %}
+
                     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -57,31 +60,117 @@
     <div id="content">{% block content %}{% endblock %}</div>
     <footer class="footer">Blog de Jean Forteroche</footer>
 </div>
+
 {% block javascript %}
-<!-- jQuery -->
-<script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
-<!-- JavaScript Boostrap plugin -->
-<script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+    <!-- jQuery -->
+    <script src="{{ asset('/lib/jquery/jquery.min.js') }}"></script>
 
-<!-- JS... -->
-<script src="{{ asset('lib/sweetalert-master/dist/sweetalert.min.js')}}"></script>
-<link rel="stylesheet" type="text/css" href="{{ asset('lib/sweetalert-master/dist/sweetalert.css')}}">
-<script type="text/javascript">
-    // function to hide or reveal a div
-    function toggle_div(bouton, id, textAjout, textAnnul) {
-        // we declare the function toggle_div
-        var div = document.getElementById(id); // get the id of the div
-        if(div.style.display=="none") { // if the div is hide...
-            div.style.display = "block"; // ... we reveal it...
-            bouton.innerHTML = textAnnul; // ... and we change the button content.
-        } else { // if the div isn't hide...
-            div.style.display = "none"; // ... we hide it...
-            bouton.innerHTML = textAjout; // ... and we change the button content.
+    <!-- JavaScript Boostrap plugin -->
+    <script src="{{ asset('/lib/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- JavaScript Tinymce plugin -->
+    <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
+
+    <!-- JavaScript SweetAlert plugin -->
+    <script src="{{ asset('/lib/sweetalert-master/dist/sweetalert.min.js')}}"></script>
+
+    <!-- Function JS... -->
+
+    <script type="text/javascript">
+        // function to hide or reveal a div
+        function toggle_div(bouton, id, textAjout, textAnnul) {
+            // we declare the function toggle_div
+            var div = document.getElementById(id); // get the id of the div
+            if(div.style.display=="none") { // if the div is hide...
+                div.style.display = "block"; // ... we reveal it...
+                bouton.innerHTML = textAnnul; // ... and we change the button content.
+            } else { // if the div isn't hide...
+                div.style.display = "none"; // ... we hide it...
+                bouton.innerHTML = textAjout; // ... and we change the button content.
+            }
         }
-    }
-
 </script>
 
+        <script type="text/javascript">
+        // function to validate a form input
+        function valider() {
+            // if the field title or content is empty
+            if(!document.formSaisie.title.value || !tinyMCE.get('$content').getContent()){
+                // we display a message
+                swal({
+                    title: "Veuillez Saisir un titre et un contenu à votre article",
+                    text: "",
+                    type: "warning",
+                    confirmButtonText: "Ok"
+                });
+                return false;
+
+            }
+            else {
+                // it's ok, we can send the form
+                return true;
+
+
+            }
+
+        }
+    </script>
+
+    <!-- Init Tinymce plugin  -->
+    <script type="text/javascript">
+        tinymce.init({
+            selector: 'zonetinymce',
+            height: 500,
+            theme: 'modern',
+            plugins: [
+                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                'searchreplace wordcount visualblocks visualchars code fullscreen',
+                'insertdatetime media nonbreaking save table contextmenu directionality',
+                'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc help'
+            ],
+            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
+            toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help',
+            image_advtab: true,
+            templates: [
+                { title: 'Test template 1', content: 'Test 1' },
+                { title: 'Test template 2', content: 'Test 2' }
+            ],
+            content_css: [
+                '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+                '//www.tinymce.com/css/codepen.min.css'
+            ]
+        });
+    </script>
+    <!-- Script to scroll to the top  -->
+    <script>
+        <!--
+        jQuery(document).ready(function(){
+            jQuery(window).scroll(function(){
+                if ($(this).scrollTop() > 50) {
+                    jQuery('#scroll-to-top').fadeIn();
+                } else {
+                    jQuery('#scroll-to-top').fadeOut();
+                }
+            });
+
+            jQuery('#scroll-to-top').click(function(){
+                jQuery('html, body').animate({scrollTop : 0},1200);
+                return false;
+            });
+            jQuery('#scroll-to-bottom').click(function(){
+                jQuery('html, body').animate({scrollTop: $(document).height()-$(window).height()},1200);
+                return false;
+            });
+        });
+        -->
+    </script>
+    <!-- Function to activate the good tab  -->
+    <script>
+        jQuery(document).ready(function(){
+            // Détecte le hash dans l'url, l'utilise pour sélectionner le lien correspondant, déclenche le clique
+            $("a[href='" + window.location.hash + "']").trigger('click')
+        });
+    </script>
 
 {% endblock %}
 </body>

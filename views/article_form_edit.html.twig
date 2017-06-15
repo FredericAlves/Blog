@@ -12,7 +12,7 @@
     </div>
         <p></p>
 
-        <form action="/admin/article/add" id="form-article" method="post">
+        <form action="/admin/article/add" id="form-article" method="post" onsubmit="return valider()" name="formSaisie">
             <div class="row">
                 <input name="id" id=$id  type="hidden" value="{{ article.id }}">
                 <div class="form-group">
@@ -27,7 +27,7 @@
 
                 <div class="form-group">
                 <div class="col-sm-12">
-                    <textarea id=$content name="content" rows="20" class="materialize-textarea wysiwyg">{{ article.content }}</textarea>
+                    <zonetinymce type="textarea" name="content" id=$content  >{{ article.content | raw}}</zonetinymce>
                 </div>
             </div>
 
@@ -40,32 +40,5 @@
             </div>
         </form>
     </div>
-    {% block javascript %}
-        {{ parent() }}
-        <script type="text/javascript" src="{{ asset('/lib/tinymce/tinymce.min.js') }}"></script>
-        <script type="text/javascript">
-            tinymce.init({
-                selector: 'textarea',
-                height: 400,
-                theme: 'modern',
-                plugins: [
-                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                    'searchreplace wordcount visualblocks visualchars code fullscreen',
-                    'insertdatetime media nonbreaking save table contextmenu directionality',
-                    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc help'
-                ],
-                toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-                toolbar2: 'print preview media | forecolor backcolor emoticons | codesample help',
-                image_advtab: true,
-                templates: [
-                    { title: 'Test template 1', content: 'Test 1' },
-                    { title: 'Test template 2', content: 'Test 2' }
-                ],
-                content_css: [
-                    '//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
-                    '//www.tinymce.com/css/codepen.min.css'
-                ]
-            });
-        </script>
-    {% endblock %}
+
 {% endblock %}
